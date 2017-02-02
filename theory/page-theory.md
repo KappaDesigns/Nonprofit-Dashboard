@@ -24,7 +24,6 @@ data-attribute on the body of each page?
       $(key) text = data
     else
       $(key) src = data
-    ```
 
 ##Testing
 
