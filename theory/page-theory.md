@@ -37,6 +37,6 @@ This can be initialized in start
 
 ##Stages
 
- 1) Set Data in redis.
- 2) Get Data from redis to display in html obj
- 3) Parse by prefix
+1. Set Data in redis.
+2. Get Data from redis to display in html obj
+3. Parse by prefix
