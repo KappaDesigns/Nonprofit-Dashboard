@@ -62,32 +62,22 @@ function getUser(uID) {
   })
 }
 
-function getAllUserIDS(next) {
-  client.smembers('users', (err, res) => {
-    if (err) {
-      return next(err);
-    }
-    next(null, res)
-  })
-}
-
 // client
 // ________________________
 let uID = createUID();
-
-// addUser(uID,
-//   {
-//     'username':'bark',
-//     'password':'bark',
-//   },
-//   (err) => {
-//     if (err) {
-//       console.log(err);
-//       return process.exit();
-//     }
-//     getUser(uID);
-//   }
-// );
+addUser(uID,
+  {
+    'username':'bark',
+    'password':'bark',
+  },
+  (err) => {
+    if (err) {
+      console.log(err);
+      return process.exit();
+    }
+    getUser(uID);
+  }
+);
 
 module.exports.addUser = addUser;
 module.exports.getUser = getUser;
