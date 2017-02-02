@@ -35,7 +35,7 @@ either txt or img, and contains some data field.
 
 This can be initialized in start
 
- ##Stages
+##Stages
 
  1) Set Data in redis.
  2) Get Data from redis to display in html obj
