@@ -13,7 +13,12 @@ data-attribute on the body of each page?
 - Store with string. String should be prefixed by the node type e.g [TXT]: or
   [IMG]: in order to parse where values go front end
 
-    ``` Psuedo Code (Loose JS)
+    ```javascript
+    var s = "JavaScript syntax highlighting";
+    alert(s);
+    ```
+
+    ```Psuedo Code (Loose JS)
     Jquery Psuedo
     key -> key from redis hashmap
     value -> get from key
@@ -24,6 +29,7 @@ data-attribute on the body of each page?
       $(key) text = data
     else
       $(key) src = data
+    ```
 
 ##Testing
 
