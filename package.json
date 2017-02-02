@@ -7,7 +7,8 @@
     "redis": "node tests/redis",
     "user": "node tests/user",
     "login": "node tests/login",
-    "flush": "node tests/flush"
+    "flush": "node tests/flush",
+    "pages": "node tests/pages"
   },
   "repository": {
     "type": "git",
