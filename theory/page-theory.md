@@ -14,11 +14,6 @@ data-attribute on the body of each page?
   [IMG]: in order to parse where values go front end
 
     ```javascript
-    var s = "JavaScript syntax highlighting";
-    alert(s);
-    ```
-
-    ```Psuedo Code (Loose JS)
     Jquery Psuedo
     key -> key from redis hashmap
     value -> get from key
