@@ -16,7 +16,7 @@ data-attribute on the body of each page?
     ```javascript
     Javascript Psuedo
     (hopefully clear enough)
-    
+
     key -> key from redis hashmap
     value -> get from key
     prefix -> value split : index 0
@@ -33,7 +33,7 @@ data-attribute on the body of each page?
 To garuntee results create mock html in console that is a struct that is
 either txt or img, and contains some data field.
 
- This can be initialized in start
+This can be initialized in start
 
  ##Stages
 
