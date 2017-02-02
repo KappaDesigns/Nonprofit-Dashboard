@@ -59,6 +59,7 @@ function getUser(uID) {
     }
     console.log(`user:${uID}`);
     console.log(res);
+    process.exit();
   })
 }
 
@@ -67,8 +68,8 @@ function getUser(uID) {
 let uID = createUID();
 addUser(uID,
   {
-    'username':'bark',
-    'password':'bark',
+    'username':'g',
+    'password':'a',
   },
   (err) => {
     if (err) {
@@ -78,7 +79,3 @@ addUser(uID,
     getUser(uID);
   }
 );
-
-module.exports.addUser = addUser;
-module.exports.getUser = getUser;
-module.exports.getAllIDS = getAllUserIDS;

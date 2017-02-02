@@ -7,10 +7,10 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-const PASS = 'test';
-const USER = 'test'
+const USER = process.argv[2];
+const PASS = process.argv[3];
 
-function getAllUserIDS(next) {
+function getAllIDS(next) {
   client.smembers('users', (err, res) => {
     if (err) {
       return next(err);
@@ -36,6 +36,9 @@ getAllIDS((err, res) => {
 					console.log(err);
 					process.exit();
 				}
+        if (++completed === res.length) {
+          process.exit();
+        }
 			})
 		);
 	})
@@ -51,7 +54,12 @@ function testUser(id, username, password, next) {
 		if (username === user.username) {
 			if (password === user.password) {
 				console.log(`valid user ${id}`);
-			}
-		}
+			} else {
+        console.log("wrong password");
+      }
+		} else {
+      console.log("wrong username");
+    }
+    return next();
 	})
 }
