@@ -4,8 +4,10 @@
   "description": "Admin pannel for nonprofits",
   "main": "app.js",
   "scripts": {
-    "redis-test": "node tests/redis",
-    "user-test": "node tests/user-test"
+    "redis": "node tests/redis",
+    "user": "node tests/user",
+    "login": "node tests/login",
+    "flush": "node tests/flush"
   },
   "repository": {
     "type": "git",

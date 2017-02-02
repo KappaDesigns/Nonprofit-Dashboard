@@ -5,7 +5,7 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-client.hgetall('frameworks', (err, res) => {
-  console.log(res);
-  process.exit();
-})
+client.flushall((err, res) => {
+	console.log(res);
+	process.exit();
+});
