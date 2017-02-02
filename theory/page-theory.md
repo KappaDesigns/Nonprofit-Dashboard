@@ -14,7 +14,9 @@ data-attribute on the body of each page?
   [IMG]: in order to parse where values go front end
 
     ```javascript
-    Jquery Psuedo
+    Javascript Psuedo
+    (hopefully clear enough)
+    
     key -> key from redis hashmap
     value -> get from key
     prefix -> value split : index 0
