@@ -8,7 +8,8 @@
     "user": "node tests/user",
     "login": "node tests/login",
     "flush": "node tests/flush",
-    "pages": "node tests/pages"
+    "pages": "node tests/pages",
+    "gallery": "node tests/gallery"
   },
   "repository": {
     "type": "git",

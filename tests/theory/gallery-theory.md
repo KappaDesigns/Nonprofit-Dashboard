@@ -4,7 +4,8 @@
 
 in redis galleries can be stored as an ordered list of images in order to keep
 the order of images the same through out each website. The list should contain
-img urls in order to change what images are stored in the galleries.
+img urls in order to change what images are stored in the galleries. Gallery key
+should be a a name passed in form of html data-attribute
 
 ## Spec
 
@@ -24,7 +25,7 @@ add value index
 
 	previmg -> list lindex index
 
-	reids list linsert value after previmg
+	reids list linsert value before previmg
 
 set value
 
