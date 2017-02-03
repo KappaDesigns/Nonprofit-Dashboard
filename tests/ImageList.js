@@ -69,7 +69,7 @@ class RedisImageList {
 	}
 
 	set(value, index) {
-		client.lset(`gallery:${this.name}`, index, value, (err, res) => {
+		client.lset(`${this.key}:${this.name}`, index, value, (err, res) => {
 			if (err) {
 				console.log(err);
 				process.exit();

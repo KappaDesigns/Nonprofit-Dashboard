@@ -9,7 +9,8 @@
     "login": "node tests/login",
     "flush": "node tests/flush",
     "pages": "node tests/pages",
-    "gallery": "node tests/gallery"
+    "gallery": "node tests/gallery",
+    "carousel": "node tests/carousel"
   },
   "repository": {
     "type": "git",

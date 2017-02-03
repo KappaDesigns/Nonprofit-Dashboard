@@ -6,20 +6,20 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-class Gallery extends ImageList {
+class Carousel extends ImageList {
   constructor(key, images) {
-    super("gallery", key, images)
+    super("carousel", key, images)
   }
 }
 
-let gallery = new Gallery("basic",['a.png','b.png','z.png']);
+let carousel = new Carousel("basic",['a.png','b.png','z.png']);
 setTimeout(function () {
-	gallery.set('c.png',0);
-}, 50);
+	carousel.set('c.png',0);
+}, 100);
 
 setTimeout(function () {
-  gallery.getAll((data) => {
+  carousel.getAll((data) => {
     console.log(data);
-    gallery.clear();
+    carousel.clear();
   });
-}, 100);
+}, 200);
