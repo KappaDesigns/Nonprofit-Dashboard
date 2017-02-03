@@ -10,7 +10,8 @@
     "flush": "node tests/flush",
     "pages": "node tests/pages",
     "gallery": "node tests/gallery",
-    "carousel": "node tests/carousel"
+    "carousel": "node tests/carousel",
+    "event": "node tests/events"
   },
   "repository": {
     "type": "git",
