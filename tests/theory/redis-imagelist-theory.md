@@ -1,4 +1,4 @@
-#Gallery Component
+#Redis ImageList
 
 ## Theory
 
