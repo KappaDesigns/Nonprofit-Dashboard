@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const User = require('./data/user');
 
 router.get('/user', (req, res, next) => {
-  res.send('user get');
+  let id = 1;
+  let user = new User(id, {
+    'username':'dark'
+  })
+  res.send(user.get())
 })
 
 router.get('/user/:id', (req, res, next) => {
