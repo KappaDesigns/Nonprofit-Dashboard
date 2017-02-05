@@ -1,24 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const Editor = require('./data/Editor');
 
-router.get('/editor/', (req, res, next) => {
-  res.send('get all editor');
+router.get('/editor/:page', (req, res, next) => {
+  Editor.get(req.params.page, (data) => {
+    res.send(data);
+  })
 })
 
-router.get('/editor/:id', (req, res, next) => {
-  res.send(`get editor with id ${req.params.id}`)
-})
-
-router.post('/editor/', (req, res, next) => {
-  res.send('post editor');
-})
-
-router.put('/editor/:id', (req, res, next) => {
-  res.send(`put editor with id ${req.params.id}`)
-})
-
-router.delete('/editor/:id', (req, res, next) => {
-  res.send(`delete editor with id ${req.params.id}`)
+router.put('/editor/:page', (req, res, next) => {
+  Editor.put(req.params.page, req.body, (data) => {
+    res.send(data);
+  })
 })
 
 module.exports = router;

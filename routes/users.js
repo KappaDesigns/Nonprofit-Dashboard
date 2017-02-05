@@ -1,29 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const User = require('./data/user');
-
-router.get('/user', (req, res, next) => {
-  let id = 1;
-  let user = new User(id, {
-    'username':'dark'
-  })
-  res.send(user.get())
-})
+const User = require('./data/User');
 
 router.get('/user/:id', (req, res, next) => {
-  res.send(req.params);
+  User.get(req.params.id, (data) => {
+    res.send(data);
+  })
 })
 
 router.post('/user', (req, res, next) => {
-  res.send('user post');
+  User.getID((id) => {
+    User.create(id, req.body, (data) => {
+      res.send(data);
+    })
+  })
 })
 
 router.put('/user/:id', (req, res, next) => {
-  res.send('user put')
+  User.put(req.params.id, req.body, (data) => {
+    res.send(data);
+  })
 })
 
 router.delete('/user/:id', (req, res, next) => {
-  res.send('user delete');
+  User.delete(req.params.id, (data) => {
+    res.send(data)
+  });
 })
 
 module.exports = router;

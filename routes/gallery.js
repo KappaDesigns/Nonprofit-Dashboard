@@ -1,24 +1,30 @@
 const express = require('express');
 const router = express.Router();
-
-router.get('/gallery/', (req, res, next) => {
-  res.send('get all gallery');
-})
+const ImageComponent = require('./data/ImageComponent');
+const component = "gallery"
 
 router.get('/gallery/:id', (req, res, next) => {
-  res.send(`get gallery with id ${req.params.id}`)
+  ImageComponent.getByID(component, req.params.id, (data) => {
+    res.send(data);
+  })
 })
 
-router.post('/gallery/', (req, res, next) => {
-  res.send('post gallery');
+router.post('/gallery/:id', (req, res, next) => {
+  ImageComponent.post(component, req.params.id, req.body, (data) => {
+    res.send(data);
+  })
 })
 
 router.put('/gallery/:id', (req, res, next) => {
-  res.send(`put gallery with id ${req.params.id}`)
+  ImageComponent.put(component, req.params.id, req.body, (data) => {
+    res.send(data);
+  })
 })
 
 router.delete('/gallery/:id', (req, res, next) => {
-  res.send(`delete gallery with id ${req.params.id}`)
+  ImageComponent.delete(component, req.params.id, (data) => {
+    res.send(`${data}`);
+  })
 })
 
 module.exports = router;

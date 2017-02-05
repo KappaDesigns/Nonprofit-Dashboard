@@ -15,6 +15,12 @@ const editor = require('./routes/editor');
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'build')));
+app.use(logger('dev'));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use('/api', user);
 app.use('/api', news);
 app.use('/api', gallery);

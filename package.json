@@ -4,14 +4,14 @@
   "description": "Admin pannel for nonprofits",
   "main": "app.js",
   "scripts": {
-    "redis": "node tests/redis",
-    "user": "node tests/user",
-    "login": "node tests/login",
-    "flush": "node tests/flush",
-    "pages": "node tests/pages",
-    "gallery": "node tests/gallery",
-    "carousel": "node tests/carousel",
-    "event": "node tests/events"
+    "redis": "node concepts/redis",
+    "user": "node concepts/user",
+    "login": "node concepts/login",
+    "flush": "node concepts/flush",
+    "pages": "node concepts/pages",
+    "gallery": "node concepts/gallery",
+    "carousel": "node concepts/carousel",
+    "event": "node concepts/events"
   },
   "repository": {
     "type": "git",
