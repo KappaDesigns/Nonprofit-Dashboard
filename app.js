@@ -29,7 +29,7 @@ app.use('/api', events);
 app.use('/api', editor);
 
 app.use('/', (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, 'index.html'))
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
 })
 
 app.listen(process.env.PORT || 3000, () => {
