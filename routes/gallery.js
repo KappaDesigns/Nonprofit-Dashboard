@@ -4,27 +4,51 @@ const ImageComponent = require('./data/ImageComponent');
 const component = "gallery"
 
 router.get('/gallery/:id', (req, res, next) => {
-  ImageComponent.getByID(component, req.params.id, (data) => {
-    res.send(data);
-  })
+  if (req.isAuthenticated()) {
+    ImageComponent.getByID(component, req.params.id, (data) => {
+      res.send(data);
+    })
+  } else {
+    res.status(403).send({
+      message: 'Forbidden'
+    })
+  }
 })
 
 router.post('/gallery/:id', (req, res, next) => {
-  ImageComponent.post(component, req.params.id, req.body, (data) => {
-    res.send(data);
-  })
+  if (req.isAuthenticated()) {
+    ImageComponent.post(component, req.params.id, req.body, (data) => {
+      res.send(data);
+    })
+  } else {
+    res.status(403).send({
+      message: 'Forbidden'
+    })
+  }
 })
 
 router.put('/gallery/:id', (req, res, next) => {
-  ImageComponent.put(component, req.params.id, req.body, (data) => {
-    res.send(data);
-  })
+  if (req.isAuthenticated()) {
+    ImageComponent.put(component, req.params.id, req.body, (data) => {
+      res.send(data);
+    })
+  } else {
+    res.status(403).send({
+      message: 'Forbidden'
+    })
+  }
 })
 
 router.delete('/gallery/:id', (req, res, next) => {
-  ImageComponent.delete(component, req.params.id, (data) => {
-    res.send(`${data}`);
-  })
+  if (req.isAuthenticated()) {
+    ImageComponent.delete(component, req.params.id, (data) => {
+      res.send(`${data}`);
+    })
+  } else {
+    res.status(403).send({
+      message: 'Forbidden'
+    })
+  }
 })
 
 module.exports = router;
