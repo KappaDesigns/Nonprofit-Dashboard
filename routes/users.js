@@ -22,16 +22,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-router.get('/user/:id', (req, res, next) => {
-  console.log(req.user);
-  User.get(req.params.id, (err, data) => {
-    if (err) {
-      return next(err);
-    }
-    res.json(data);
-  })
-})
-
 router.post('/login/', (req, res, next) => {
   passport.authenticate('local', {session: true}, (err, user, info) => {
     if (err) {
@@ -52,33 +42,73 @@ router.post('/login/', (req, res, next) => {
   })(req,res,next)
 })
 
-router.post('/user', (req, res, next) => {
-  User.getID((id) => {
-    User.create(id, req.body, (err, data) => {
+router.get('/logout/', (req, res, next) => {
+  req.logout();
+  res.status(200).send({
+    message:'logged out'
+  })
+})
+
+router.get('/user/:id', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    User.get(req.params.id, (err, data) => {
       if (err) {
         return next(err);
       }
       res.json(data);
     })
-  })
+  } else {
+    res.status(403).send({
+      message:'Forbidden'
+    })
+  }
+})
+
+router.post('/user', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    User.getID((id) => {
+      User.create(id, req.body, (err, data) => {
+        if (err) {
+          return next(err);
+        }
+        res.json(data);
+      })
+    })
+  } else {
+    res.status(403).send({
+      message:'Forbidden'
+    })
+  }
 })
 
 router.put('/user/:id', (req, res, next) => {
-  User.put(req.params.id, req.body, (err, data) => {
-    if (err) {
-      return next(err);
-    }
-    res.send(data);
-  })
+  if (req.isAuthenticated()) {
+    User.put(req.params.id, req.body, (err, data) => {
+      if (err) {
+        return next(err);
+      }
+      res.send(data);
+    })
+  } else {
+    res.status(403).send({
+      message:'Forbidden'
+    })
+  }
 })
 
 router.delete('/user/:id', (req, res, next) => {
-  User.delete(req.params.id, (err, data) => {
-    if (err) {
-      return next(err);
-    }
-    res.send(data)
-  });
+  if (req.isAuthenticated()) {
+    User.delete(req.params.id, (err, data) => {
+      if (err) {
+        return next(err);
+      }
+      res.send(data)
+    });
+  } else {
+    res.status(403).send({
+      message:'Forbidden'
+    })
+  }
 })
 
 module.exports = router;

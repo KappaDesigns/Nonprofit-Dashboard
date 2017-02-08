@@ -3,7 +3,6 @@ const router = express.Router();
 const News = require('./data/News');
 
 router.get('/news/:start/:end', (req, res, next) => {
-  console.log(req.params);
   News.getRange(req.params.start, req.params.end, (data) => {
     res.send(data)
   })
