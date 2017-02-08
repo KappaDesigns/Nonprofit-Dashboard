@@ -22,7 +22,6 @@ const User = require('./routes/data/User');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'build')));
 app.use(logger('dev'));
 app.use(cookieParser('keyboard cat'));
 app.use(bodyParser.json());
@@ -34,18 +33,20 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'build')));
 
 passport.serializeUser((user, next) => {
   next(null, user.id);
 })
 
 passport.deserializeUser((id, next) => {
+  console.log("here");
   User.get(id, (err, data) => {
-    next(null, user)
+    next(null, data)
   })
 })
 
@@ -63,3 +64,5 @@ app.use('/', (req, res, next) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log('Example app listening on port 3000!');
 })
+
+module.exports = app;

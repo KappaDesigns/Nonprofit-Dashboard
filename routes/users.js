@@ -7,6 +7,7 @@ const User = require('./data/User');
 passport.use(new LocalStrategy(
   (username, password, next) => {
     User.getUsername(username, (err, user) => {
+
       if (err) {
         return next(err);
       }
@@ -22,7 +23,7 @@ passport.use(new LocalStrategy(
 ));
 
 router.get('/user/:id', (req, res, next) => {
-  console.log(req);
+  console.log(req.user);
   User.get(req.params.id, (err, data) => {
     if (err) {
       return next(err);
@@ -39,11 +40,10 @@ router.post('/login/', (req, res, next) => {
     if (!user) {
       return res.status(404).send({ message: 'Failed To Login', success: false });
     }
-    req.logIn(user, (err) => {
+    req.login(user, (err) => {
       if (err) {
         return next(err);
       }
-      console.log(req);
       return res.status(200).send({
         message:'Success',
         success: true,
