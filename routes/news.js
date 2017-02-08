@@ -3,27 +3,15 @@ const router = express.Router();
 const News = require('./data/News');
 
 router.get('/news/:start/:end', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    News.getRange(req.params.start, req.params.end, (data) => {
-      res.send(data)
-    })
-  } else {
-    res.status(403).send({
-      message:'Forbidden'
-    })
-  }
+  News.getRange(req.params.start, req.params.end, (data) => {
+    res.send(data)
+  })
 })
 
 router.get('/news/:id', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    News.getByID(req.params.id, (data) => {
-      res.send(data);
-    })
-  } else {
-    res.status(403).send({
-      message: 'Forbidden'
-    })
-  }
+  News.getByID(req.params.id, (data) => {
+    res.send(data);
+  })
 })
 
 router.post('/news/:id', (req, res, next) => {

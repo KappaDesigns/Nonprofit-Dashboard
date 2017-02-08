@@ -4,15 +4,9 @@ const ImageComponent = require('./data/ImageComponent');
 const component = "gallery"
 
 router.get('/gallery/:id', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    ImageComponent.getByID(component, req.params.id, (data) => {
-      res.send(data);
-    })
-  } else {
-    res.status(403).send({
-      message: 'Forbidden'
-    })
-  }
+  ImageComponent.getByID(component, req.params.id, (data) => {
+    res.send(data);
+  })
 })
 
 router.post('/gallery/:id', (req, res, next) => {

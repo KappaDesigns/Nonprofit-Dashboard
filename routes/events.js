@@ -3,15 +3,9 @@ const router = express.Router();
 const Event = require('./data/Events');
 
 router.get('/event/', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    Event.get((data) => {
-      res.send(data);
-    });
-  } else {
-    res.status(403).send({
-      message: 'Forbidden'
-    })
-  }
+  Event.get((data) => {
+    res.send(data);
+  });
 })
 
 router.put('/event/', (req, res, next) => {
