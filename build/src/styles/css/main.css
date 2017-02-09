@@ -1,4 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans");
 body, html {
-  background-color: pink; }
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif; }
+
+#not-found {
+  height: 100vh;
+  background-color: #e6e6e6;
+  text-align: center; }
+  #not-found .jumbotron {
+    background-image: url("http://i.imgur.com/Jx3eMzK.jpg");
+    height: 50vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center; }
+    @media all and (max-width: 580px) {
+      #not-found .jumbotron {
+        height: 40vh; } }
+  #not-found .home {
+    font-size: 28px;
+    background: #f85032;
+    background: linear-gradient(to right, #64af67 50%, rgba(255, 255, 255, 0) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all 0.5s ease;
+    margin: 0 auto;
+    padding: 5px 10px;
+    width: 250px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: black;
+    border: 3px solid black; }
+    #not-found .home:hover {
+      background-position: left bottom; }
+  #not-found .not-found-text {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    font-size: 34px;
+    border-bottom: 3px solid black;
+    padding-bottom: 15px; }
 
 /*# sourceMappingURL=main.css.map */

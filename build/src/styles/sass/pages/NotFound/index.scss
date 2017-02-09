@@ -1,0 +1,41 @@
+#not-found {
+  height: 100vh;
+  background-color: rgb(230, 230, 230);
+  text-align: center;
+  .jumbotron {
+    background-image: url('http://i.imgur.com/Jx3eMzK.jpg');
+    height: 50vh;
+    @media all and (max-width: 580px) {
+      height: 40vh;
+    }
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+  .home {
+    font-size: 28px;
+    background: rgba(248,80,50,1);
+    background: linear-gradient(to right, #64af67 50%, rgba(255, 255, 255, 0) 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+    transition:all 0.5s ease;
+    &:hover {
+      background-position:left bottom;
+    }
+    margin: 0 auto;
+    padding: 5px 10px;
+    width: 250px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: black;
+    border: 3px solid black;
+  }
+  .not-found-text {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    font-size: 34px;
+    border-bottom: 3px solid black;
+    padding-bottom: 15px;
+  }
+}
