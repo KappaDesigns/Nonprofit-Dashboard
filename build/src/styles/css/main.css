@@ -9,7 +9,7 @@ body, html {
   background-color: #e6e6e6;
   text-align: center; }
   #not-found .jumbotron {
-    background-image: url("http://i.imgur.com/Jx3eMzK.jpg");
+    background-image: url("http://i.imgur.com/xMDUKDZ.jpg");
     height: 50vh;
     width: 100%;
     background-size: cover;
@@ -17,6 +17,12 @@ body, html {
     @media all and (max-width: 580px) {
       #not-found .jumbotron {
         height: 40vh; } }
+    #not-found .jumbotron .notfound {
+      padding-top: 4vh;
+      font-size: 5vh;
+      margin: 0;
+      color: white;
+      letter-spacing: 12px; }
   #not-found .home {
     font-size: 28px;
     background: #f85032;

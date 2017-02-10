@@ -3,7 +3,7 @@
   background-color: rgb(230, 230, 230);
   text-align: center;
   .jumbotron {
-    background-image: url('http://i.imgur.com/Jx3eMzK.jpg');
+    background-image: url('http://i.imgur.com/xMDUKDZ.jpg');
     height: 50vh;
     @media all and (max-width: 580px) {
       height: 40vh;
@@ -11,6 +11,13 @@
     width: 100%;
     background-size: cover;
     background-position: center center;
+    .notfound {
+      padding-top: 4vh;
+      font-size: 5vh;
+      margin: 0;
+      color:white;
+      letter-spacing: 12px;
+    }
   }
   .home {
     font-size: 28px;

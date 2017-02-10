@@ -20,6 +20,10 @@ module.exports = {
       {
         test: /\.css$/,
         loader: "style-loader!css-loader",
+      },
+      {
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+        loader: 'url-loader?importLoaders=1&limit=100000'
       }
     ]
   },
