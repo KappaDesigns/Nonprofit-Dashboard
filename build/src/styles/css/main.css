@@ -19,10 +19,10 @@ body, html {
         height: 40vh; } }
     #not-found .jumbotron .notfound {
       padding-top: 4vh;
-      font-size: 5vh;
+      font-size: 8vh;
       margin: 0;
       color: white;
-      letter-spacing: 12px; }
+      letter-spacing: 100px; }
   #not-found .home {
     font-size: 28px;
     background: #f85032;
@@ -46,6 +46,107 @@ body, html {
     font-size: 34px;
     border-bottom: 3px solid black;
     padding-bottom: 15px; }
+
+#history {
+  margin: 25px 0;
+  width: 100%;
+  height: auto; }
+  #history h1 {
+    font-size: 5vw;
+    width: 25%;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin: 15px auto;
+    padding: 10px 15px; }
+    @media all and (min-width: 560px) {
+      #history h1 {
+        font-size: 48px; } }
+  #history .history-row {
+    border-top: 1px solid black;
+    color: black;
+    width: 100%;
+    padding: 15px 0;
+    transition: all 0.25s linear; }
+    #history .history-row .user-icon {
+      display: inline;
+      height: 20px;
+      width: 20px;
+      display: none; }
+      @media all and (min-width: 760px) {
+        #history .history-row .user-icon {
+          display: inline;
+          padding-left: 60px; } }
+    #history .history-row .edit {
+      transition: all 0.5s ease-in-out;
+      display: block;
+      padding-left: 25px;
+      color: #3d3d3d; }
+      @media all and (min-width: 760px) {
+        #history .history-row .edit {
+          display: inline; } }
+      #history .history-row .edit i {
+        padding-right: 10px; }
+    #history .history-row .edit-date {
+      display: block;
+      font-weight: 700;
+      padding-left: 100px;
+      color: #3C91E6; }
+      @media all and (min-width: 760px) {
+        #history .history-row .edit-date {
+          display: inline; } }
+    #history .history-row .note {
+      display: none;
+      padding-left: 25px; }
+      @media all and (min-width: 760px) {
+        #history .history-row .note {
+          display: inline; } }
+      @media all and (min-width: 560px) {
+        #history .history-row .note {
+          padding-left: 75px; } }
+    #history .history-row:hover {
+      cursor: default;
+      background-color: #342E37;
+      color: #FAFFFD; }
+      #history .history-row:hover .edit-date {
+        color: #FA824C; }
+      #history .history-row:hover .edit {
+        color: #98cd1f; }
+  #history:hover h1 {
+    -webkit-box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.75);
+    transform: translateY(-25px);
+    color: #A2D729;
+    background-color: #342E37; }
+
+.dashboard-container {
+  display: flex;
+  flex-flow: wrap; }
+  .dashboard-container #pages {
+    width: 100%;
+    height: 400px;
+    background-color: aqua;
+    margin: 0 auto; }
+  .dashboard-container #events {
+    width: 500px;
+    height: 600px;
+    background-color: red;
+    margin: 0 auto; }
+  .dashboard-container #news {
+    width: 500px;
+    height: 600px;
+    background-color: yellow;
+    margin: 0 auto; }
+  .dashboard-container #carousel {
+    width: 800px;
+    height: 600px;
+    background-color: purple;
+    margin: 0 auto; }
+  .dashboard-container #gallery {
+    width: 700px;
+    height: 600px;
+    background-color: orange;
+    margin: 0 auto; }
 
 .action-button {
   width: 75px;

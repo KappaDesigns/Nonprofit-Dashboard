@@ -67,7 +67,7 @@ export default class ActionButton extends React.Component {
 		if (this.state.displayMenu) {
 			return (
 				<div className="action-button-contianer">
-					<div onClick={this.handleButton} className="action-button">+</div>
+					<div onClick={this.handleButton} className="action-button"><span className="button-text">+</span></div>
 					<div className="action-menu">
 						{this.state.actions.map((action, i) => {
 							return (
@@ -85,7 +85,7 @@ export default class ActionButton extends React.Component {
 		} else {
 			return (
 				<div className="action-button-contianer">
-					<div onClick={this.handleButton} className="action-button">+</div>
+					<div onClick={this.handleButton} className="action-button"><span className="button-text">+</span></div>
 				</div>
 			)
 		}
