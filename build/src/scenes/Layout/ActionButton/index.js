@@ -66,7 +66,7 @@ export default class ActionButton extends React.Component {
 		}, 200);
 		if (this.state.displayMenu) {
 			return (
-				<div className="temp">
+				<div className="action-button-contianer">
 					<div onClick={this.handleButton} className="action-button">+</div>
 					<div className="action-menu">
 						{this.state.actions.map((action, i) => {
@@ -84,7 +84,7 @@ export default class ActionButton extends React.Component {
 			)
 		} else {
 			return (
-				<div className="temp">
+				<div className="action-button-contianer">
 					<div onClick={this.handleButton} className="action-button">+</div>
 				</div>
 			)
