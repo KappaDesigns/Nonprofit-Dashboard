@@ -1,0 +1,85 @@
+.action-button {
+	width: 75px;
+	height: 75px;
+	background-color: rgb(29, 189, 249);
+	border-radius: 75px;
+	text-align: center;
+	line-height: 80px;
+	font-size: 50px;
+	position: fixed;
+	bottom: 25px;
+	right: 25px;
+	z-index: 25;
+	color:white;
+	text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.55);
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+	font-weight: 100;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.action-menu {
+	position: fixed;
+	bottom: 100px;
+	right: 27px;
+	.action-container {
+		position: fixed;
+		bottom: 25px;
+		right: 27px;
+		text-align: center;
+		color: black;
+		width: 40px;
+		height: 40px;
+		margin: 10px;
+		padding: 5px;
+		line-height: 50px;
+		border-radius: 40px;
+		-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+		[id*="action-"] {
+			color: black;
+		}
+	}
+	#profile {
+		background-color: rgb(241, 76, 14);
+	}
+	#sign-out {
+		background-color: rgb(36, 195, 217);
+	}
+	#message {
+		background-color: rgb(204, 61, 196);
+	}
+
+	.action-tooltip-container {
+		display: none;
+		.action-tooltip {
+			position: fixed;
+			bottom: 25px;
+			right: 107px;
+			border: 2px solid rgb(181, 181, 181);
+			border-radius: 4px;
+			padding: 7px 15px;
+		}
+		.tooltip-right {
+			position: fixed;
+			right: 91px;
+			bottom: 25px;
+			width: 0;
+			height: 0;
+			border-top:10px solid transparent;
+			border-bottom:10px solid transparent;
+			border-radius: 3px;
+			border-left: 18px solid rgb(181, 181, 181);
+		}
+	}
+}

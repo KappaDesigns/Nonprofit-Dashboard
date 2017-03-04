@@ -1,0 +1,78 @@
+.navbar {
+	margin-bottom: 100px;
+	flex-wrap: wrap;
+	height:200px;
+	@media all and (min-width: 560px) {
+		flex-wrap: nowrap;
+		height: 75px;
+	}
+	background-color: rgb(247, 247, 247);
+	border-bottom: 1px solid rgb(226, 226, 226);
+	display: flex;
+	text-align: center;
+	.navbar-link {
+		text-decoration: none;
+		font-weight: bold;
+		color:black;
+		display: block;
+		font-size: 12px;
+		width: 20%;
+		@media all and (min-width: 560px) {
+			font-size: 14px;
+			width: 16.6%;
+		}
+		height: 100%;
+		line-height: 75px;
+		&:hover {
+			.link-text {
+				background-color: rgb(153, 153, 153);
+				border-radius: 15px;
+			}
+		}
+		.link-text {
+			transition: all 0.5s ease;
+			padding: 10px 15px;
+			@media all and (min-width: 560px) {
+				padding: 10px 25px;
+			}
+		}
+	}
+	#link-1 {
+		&:hover {
+			color: $link-1-color;
+		}
+	}
+	#link-2 {
+		&:hover {
+			color: $link-2-color;
+		}
+	}
+	#link-3 {
+		&:hover {
+			color: $link-3-color;
+		}
+	}
+	#link-4 {
+		&:hover {
+			color: $link-4-color;
+		}
+	}
+	#link-5 {
+		&:hover {
+			color: $link-5-color;
+		}
+	}
+}
+#logo {
+	padding-top: 15px;
+	@media all and (min-width: 560px) {
+		width: 16.6%;
+	}
+	width: 100%;
+	padding-bottom: 25px;
+	img {
+		height: 100px;
+		width: 100px;
+	}
+	line-height: 0;
+}
