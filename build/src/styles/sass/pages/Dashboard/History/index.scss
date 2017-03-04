@@ -50,8 +50,9 @@
       color: #3C91E6;
     }
     .note {
+      font-size: 12px;
       display: none;
-      @media all and (min-width: 760px) {
+      @media all and (min-width: 960px) {
         display: inline;
       }
       padding-left: 25px;
