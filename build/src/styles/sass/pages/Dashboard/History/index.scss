@@ -53,10 +53,15 @@
       color: #3C91E6;
     }
     .note {
+      font-size: 12px;
       display: none;
+<<<<<<< HEAD
       @media all and (min-width: 760px) {
         font-size: 0.9vw;
         overflow: hidden;
+=======
+      @media all and (min-width: 960px) {
+>>>>>>> 46f92de759c878adf4785bded6f846036ece8b32
         display: inline;
         padding-left: 25px;
       }
