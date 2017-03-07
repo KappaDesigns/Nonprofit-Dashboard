@@ -1,12 +1,16 @@
 #events {
-	margin: 50px auto;
-	width: 500px;
+	margin: 50px 2%;
+	width: 96%;
 	height:750px;
 	margin: 0 auto;
 	display: block;
 	color: black;
 	text-align: center;
 	text-decoration: none;
+	@media all and (min-width: 500px) {
+		width: 500px;
+		margin: 50px auto;
+	}
 	.section-title {
 		padding: 25px 15px;
 		transition: all 0.5s ease;

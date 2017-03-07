@@ -1,12 +1,15 @@
 .navbar {
-	margin-bottom: 50px;
+	transition: all 0.5s ease;
+	width: 100%;
+	position: fixed;
 	flex-wrap: wrap;
 	height:200px;
+	z-index: 100;
 	@media all and (min-width: 560px) {
 		flex-wrap: nowrap;
 		height: 75px;
 	}
-	background-color: rgb(247, 247, 247);
+	background-color: #342E37;
 	border-bottom: 1px solid rgb(226, 226, 226);
 	display: flex;
 	text-align: center;
@@ -36,6 +39,9 @@
 				padding: 10px 25px;
 			}
 		}
+	}
+	[id*="link-"] {
+		color: #FAFFFA;
 	}
 	#link-1 {
 		&:hover {

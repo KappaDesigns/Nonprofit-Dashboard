@@ -51,13 +51,17 @@ body, html {
   margin: 25px 0;
   width: 100%;
   height: auto; }
+  @media all and (min-width: 1000px) {
+    #history {
+      width: 90%;
+      margin: 25px 5%; } }
   #history h1 {
     font-size: 5vw;
     width: 25%;
     text-align: center;
     transition: all 0.5s ease-in-out;
-    margin: 15px auto;
-    padding: 10px 15px; }
+    margin: 75px auto;
+    padding: 25px 15px; }
     @media all and (min-width: 560px) {
       #history h1 {
         font-size: 32px; } }
@@ -97,18 +101,10 @@ body, html {
         #history .history-row .edit-date {
           display: inline; } }
     #history .history-row .note {
-<<<<<<< HEAD
+      font-size: 15px;
       display: none; }
-      @media all and (min-width: 760px) {
-=======
-      font-size: 12px;
-      display: none;
-      padding-left: 25px; }
       @media all and (min-width: 960px) {
->>>>>>> 46f92de759c878adf4785bded6f846036ece8b32
         #history .history-row .note {
-          font-size: 0.9vw;
-          overflow: hidden;
           display: inline;
           padding-left: 25px; } }
     #history .history-row:hover {
@@ -128,14 +124,18 @@ body, html {
     background-color: #342E37; }
 
 #events {
-  margin: 50px auto;
-  width: 500px;
+  margin: 50px 2%;
+  width: 96%;
   height: 750px;
   margin: 0 auto;
   display: block;
   color: black;
   text-align: center;
   text-decoration: none; }
+  @media all and (min-width: 500px) {
+    #events {
+      width: 500px;
+      margin: 50px auto; } }
   #events .section-title {
     padding: 25px 15px;
     transition: all 0.5s ease; }
@@ -276,10 +276,13 @@ body, html {
       border-left: 18px solid #b5b5b5; }
 
 .navbar {
-  margin-bottom: 50px;
+  transition: all 0.5s ease;
+  width: 100%;
+  position: fixed;
   flex-wrap: wrap;
   height: 200px;
-  background-color: #f7f7f7;
+  z-index: 100;
+  background-color: #342E37;
   border-bottom: 1px solid #e2e2e2;
   display: flex;
   text-align: center; }
@@ -309,6 +312,8 @@ body, html {
       @media all and (min-width: 560px) {
         .navbar .navbar-link .link-text {
           padding: 10px 25px; } }
+  .navbar [id*="link-"] {
+    color: #FAFFFA; }
   .navbar #link-1:hover {
     color: red; }
   .navbar #link-2:hover {
