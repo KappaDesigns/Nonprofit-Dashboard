@@ -1,6 +1,8 @@
 import React from "react";
 import History from "./History/index.js";
 import Event from "./Event/index.js";
+import Carousel from "./Carousel/index.js";
+import Gallery from "./Gallery/index.js";
 
 export default class Home extends React.Component {
   render() {
@@ -9,8 +11,8 @@ export default class Home extends React.Component {
         <History></History>
         <Event></Event>
         <div className="dashboard-component" id="news"></div>
-        <div className="dashboard-component" id="gallery"></div>
-        <div className="dashboard-component" id="carousel"></div>
+        <Gallery></Gallery>
+        <Carousel></Carousel>
         <div className="dashboard-component" id="pages"></div>
       </div>
     )

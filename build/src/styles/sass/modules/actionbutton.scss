@@ -63,10 +63,11 @@
 	.action-tooltip-container {
 		display: none;
 		.action-tooltip {
+			background-color: white;
 			position: fixed;
 			bottom: 25px;
 			right: 107px;
-			border: 2px solid rgb(181, 181, 181);
+			border: 2px solid rgb(52, 52, 52);
 			border-radius: 4px;
 			padding: 7px 15px;
 		}
@@ -79,7 +80,7 @@
 			border-top:10px solid transparent;
 			border-bottom:10px solid transparent;
 			border-radius: 3px;
-			border-left: 18px solid rgb(181, 181, 181);
+			border-left: 18px solid rgb(52, 52, 52);
 		}
 	}
 }

@@ -97,18 +97,14 @@ body, html {
         #history .history-row .edit-date {
           display: inline; } }
     #history .history-row .note {
-<<<<<<< HEAD
+      font-size: 12px;
       display: none; }
       @media all and (min-width: 760px) {
-=======
-      font-size: 12px;
-      display: none;
-      padding-left: 25px; }
-      @media all and (min-width: 960px) {
->>>>>>> 46f92de759c878adf4785bded6f846036ece8b32
         #history .history-row .note {
           font-size: 0.9vw;
-          overflow: hidden;
+          overflow: hidden; } }
+      @media all and (min-width: 960px) {
+        #history .history-row .note {
           display: inline;
           padding-left: 25px; } }
     #history .history-row:hover {
@@ -172,6 +168,119 @@ body, html {
     color: #A2D729;
     background-color: #342E37; }
 
+#carousel {
+  display: block;
+  text-decoration: none;
+  color: black;
+  height: 600px;
+  width: 100%;
+  margin: 50px auto;
+  text-align: center; }
+  @media all and (min-width: 1000px) {
+    #carousel {
+      width: 80%; } }
+  #carousel .carousel-title {
+    width: 33%;
+    margin: 0 auto;
+    padding: 25px 15px;
+    transition: all 0.5s ease; }
+  #carousel:hover .carousel-title {
+    -webkit-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    transform: translateY(-15px);
+    color: #A2D729;
+    background-color: #342E37; }
+  #carousel .carousel-slider {
+    width: 90%;
+    margin: 25px auto;
+    padding: 25px 10px;
+    transition: all 0.5s ease; }
+    #carousel .carousel-slider:hover {
+      -webkit-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75); }
+    #carousel .carousel-slider .slide {
+      height: 450px;
+      width: 80%;
+      margin: 0 auto;
+      background-image: url("http://cdn.pcwallart.com/images/beautiful-starry-night-sky-wallpaper-4.jpg"); }
+      #carousel .carousel-slider .slide .slide-desc {
+        display: none; }
+  #carousel .prev {
+    padding: 0px 15px;
+    color: black;
+    position: absolute;
+    display: block;
+    left: 18%;
+    transform: translateY(-250px);
+    font-size: 48px;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    color: #3C91E6; }
+    #carousel .prev:hover {
+      background-color: #342E37;
+      color: #FA824C;
+      font-weight: 800;
+      font-size: 56px; }
+  #carousel .next {
+    padding: 0px 15px;
+    color: black;
+    text-decoration: none;
+    position: absolute;
+    display: block;
+    right: 18%;
+    transform: translateY(-250px);
+    font-size: 48px;
+    transition: all 0.5s ease;
+    color: #3C91E6; }
+    #carousel .next:hover {
+      background-color: #342E37;
+      color: #FA824C;
+      font-weight: 800;
+      font-size: 56px; }
+
+#gallery {
+  display: block;
+  text-decoration: none;
+  color: black;
+  height: 600px;
+  width: 100%;
+  margin: 50px auto;
+  text-align: center; }
+  @media all and (min-width: 1000px) {
+    #gallery {
+      width: 80%; } }
+  #gallery .gallery-title {
+    width: 33%;
+    margin: 0 auto;
+    padding: 25px 15px;
+    transition: all 0.5s ease; }
+  #gallery:hover .gallery-title {
+    -webkit-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    transform: translateY(-15px);
+    color: #A2D729;
+    background-color: #342E37; }
+  #gallery .gallery-container {
+    width: 90%;
+    height: 400px;
+    margin: 25px auto;
+    padding: 25px 10px;
+    transition: all 0.5s ease; }
+    #gallery .gallery-container:hover {
+      -webkit-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75); }
+    #gallery .gallery-container .gallery-img {
+      margin: 50px 0;
+      position: absolute;
+      right: 50%;
+      left: 50%;
+      width: 300px;
+      height: 300px; }
+
 .dashboard-container {
   display: flex;
   flex-flow: wrap; }
@@ -184,16 +293,6 @@ body, html {
     width: 500px;
     height: 600px;
     background-color: yellow;
-    margin: 0 auto; }
-  .dashboard-container #carousel {
-    width: 800px;
-    height: 600px;
-    background-color: purple;
-    margin: 0 auto; }
-  .dashboard-container #gallery {
-    width: 700px;
-    height: 600px;
-    background-color: orange;
     margin: 0 auto; }
 
 .action-button {
@@ -258,10 +357,11 @@ body, html {
   .action-menu .action-tooltip-container {
     display: none; }
     .action-menu .action-tooltip-container .action-tooltip {
+      background-color: white;
       position: fixed;
       bottom: 25px;
       right: 107px;
-      border: 2px solid #b5b5b5;
+      border: 2px solid #343434;
       border-radius: 4px;
       padding: 7px 15px; }
     .action-menu .action-tooltip-container .tooltip-right {
@@ -273,7 +373,7 @@ body, html {
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
       border-radius: 3px;
-      border-left: 18px solid #b5b5b5; }
+      border-left: 18px solid #343434; }
 
 .navbar {
   margin-bottom: 50px;

@@ -1,5 +1,7 @@
 @import "History/index.scss";
 @import "Event/index.scss";
+@import "Carousel/index.scss";
+@import "Gallery/index.scss";
 
 .dashboard-container {
   display: flex;
@@ -14,18 +16,6 @@
     width: 500px;
     height: 600px;
     background-color: yellow;
-    margin: 0 auto;
-  }
-  #carousel {
-    width: 800px;
-    height: 600px;
-    background-color: purple;
-    margin: 0 auto;
-  }
-  #gallery {
-    width: 700px;
-    height: 600px;
-    background-color: orange;
     margin: 0 auto;
   }
 }

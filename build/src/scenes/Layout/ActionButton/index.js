@@ -18,7 +18,7 @@ export default class ActionButton extends React.Component {
 					id: "sign-out",
 					cssID: "action-2",
 					icon: "fa fa-sign-out fa-2x",
-					link: "/logout",
+					link: "/api/logout",
 					tooltip: "Sign Out"
 				},
 			],
