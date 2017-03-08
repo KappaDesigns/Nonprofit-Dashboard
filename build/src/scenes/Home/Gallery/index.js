@@ -5,7 +5,7 @@ export default class Gallery extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			length: 0,
+			length: 5,
 			images: [
 				{
 					id: 0,
@@ -18,6 +18,14 @@ export default class Gallery extends React.Component {
 				{
 					id: 2,
 					src: "https://68.media.tumblr.com/1e27b1c53d871a9601fa7071b6e78e67/tumblr_inline_nynb8wVZII1rib5xn_540.jpg"
+				},
+				{
+					id: 3,
+					src: "https://68.media.tumblr.com/1e27b1c53d871a9601fa7071b6e78e67/tumblr_inline_nynb8wVZII1rib5xn_540.jpg"
+				},
+				{
+					id: 4,
+					src: "https://68.media.tumblr.com/1e27b1c53d871a9601fa7071b6e78e67/tumblr_inline_nynb8wVZII1rib5xn_540.jpg"
 				}
 			]
 		}
@@ -25,10 +33,19 @@ export default class Gallery extends React.Component {
 	}
 
 	renderImages(image) {
-		let translateInc = -(20 * (image.id + 1)) - 150;
-		console.log(translateInc, image.id);
+		let z = image.id;
+		let incr = (40 / this.state.length) * Math.floor((image.id + 1) / 2);
+		if (image.id % 2 == 0) {
+			incr = 50 + incr;
+		} else {
+			incr = 50 - incr;
+		}
+		if (image.id == 0) {
+			incr = 50;
+		}
 		let style = {
-			transform: `translateX(${translateInc});`
+			left: `${incr}%`,
+			zIndex: this.state.length - image.id
 		}
 		return (
 			<img style={style} key={image.id} src={image.src} alt="1" className="gallery-img" id={`gallery-${image.id}`}/>
@@ -37,7 +54,7 @@ export default class Gallery extends React.Component {
 
 	render() {
 		return (
-			<Link className="dashboard-component" id="gallery">
+			<Link to="/gallery/id" className="dashboard-component" id="gallery">
 				<h1 className="gallery-title">Gallery</h1>
 				<div className="gallery-container">
 					{this.state.images.map(this.renderImages)}

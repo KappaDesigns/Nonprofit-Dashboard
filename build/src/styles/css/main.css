@@ -51,13 +51,17 @@ body, html {
   margin: 25px 0;
   width: 100%;
   height: auto; }
+  @media all and (min-width: 1000px) {
+    #history {
+      width: 90%;
+      margin: 25px 5%; } }
   #history h1 {
     font-size: 5vw;
     width: 25%;
     text-align: center;
     transition: all 0.5s ease-in-out;
-    margin: 15px auto;
-    padding: 10px 15px; }
+    margin: 75px auto;
+    padding: 25px 15px; }
     @media all and (min-width: 560px) {
       #history h1 {
         font-size: 32px; } }
@@ -97,7 +101,7 @@ body, html {
         #history .history-row .edit-date {
           display: inline; } }
     #history .history-row .note {
-      font-size: 12px;
+      font-size: 15px;
       display: none; }
       @media all and (min-width: 760px) {
         #history .history-row .note {
@@ -124,14 +128,18 @@ body, html {
     background-color: #342E37; }
 
 #events {
-  margin: 50px auto;
-  width: 500px;
-  height: 750px;
+  margin: 50px 2%;
+  width: 96%;
+  height: 700px;
   margin: 0 auto;
   display: block;
   color: black;
   text-align: center;
   text-decoration: none; }
+  @media all and (min-width: 500px) {
+    #events {
+      width: 500px;
+      margin: 50px auto; } }
   #events .section-title {
     padding: 25px 15px;
     transition: all 0.5s ease; }
@@ -276,10 +284,20 @@ body, html {
     #gallery .gallery-container .gallery-img {
       margin: 50px 0;
       position: absolute;
-      right: 50%;
-      left: 50%;
       width: 300px;
-      height: 300px; }
+      height: 300px;
+      transform: translateX(-150px); }
+      #gallery .gallery-container .gallery-img:hover {
+        z-index: 100 !important;
+        -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.75); }
+
+#news {
+  width: 500px;
+  height: 600px;
+  background-color: yellow;
+  margin: 0 auto; }
 
 .dashboard-container {
   display: flex;
@@ -288,11 +306,6 @@ body, html {
     width: 100%;
     height: 400px;
     background-color: aqua;
-    margin: 0 auto; }
-  .dashboard-container #news {
-    width: 500px;
-    height: 600px;
-    background-color: yellow;
     margin: 0 auto; }
 
 .action-button {
@@ -376,10 +389,13 @@ body, html {
       border-left: 18px solid #343434; }
 
 .navbar {
-  margin-bottom: 50px;
+  transition: all 0.5s ease;
+  width: 100%;
+  position: fixed;
   flex-wrap: wrap;
   height: 200px;
-  background-color: #f7f7f7;
+  z-index: 1000;
+  background-color: #342E37;
   border-bottom: 1px solid #e2e2e2;
   display: flex;
   text-align: center; }
@@ -409,16 +425,18 @@ body, html {
       @media all and (min-width: 560px) {
         .navbar .navbar-link .link-text {
           padding: 10px 25px; } }
+  .navbar [id*="link-"] {
+    color: #FAFFFA; }
   .navbar #link-1:hover {
-    color: red; }
+    color: #951adf; }
   .navbar #link-2:hover {
-    color: red; }
+    color: #74fbc0; }
   .navbar #link-3:hover {
-    color: red; }
+    color: #fa317a; }
   .navbar #link-4:hover {
-    color: red; }
+    color: #adda09; }
   .navbar #link-5:hover {
-    color: red; }
+    color: #34d100; }
 
 #logo {
   padding-top: 15px;

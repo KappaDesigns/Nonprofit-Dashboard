@@ -1,6 +1,10 @@
 #history {
   margin: 25px 0;
   width: 100%;
+  @media all and (min-width: 1000px) {
+    width: 90%;
+    margin: 25px 5%;
+  }
   height: auto;
   h1 {
     font-size: 5vw;
@@ -10,8 +14,8 @@
     width: 25%;
     text-align: center;
     transition: all 0.5s ease-in-out;
-    margin: 15px auto;
-    padding: 10px 15px;
+    margin: 75px auto;
+    padding: 25px 15px;
   }
   .history-row {
     border-top: 1px solid black;
@@ -53,7 +57,7 @@
       color: #3C91E6;
     }
     .note {
-      font-size: 12px;
+      font-size: 15px;
       display: none;
       @media all and (min-width: 760px) {
         font-size: 0.9vw;
