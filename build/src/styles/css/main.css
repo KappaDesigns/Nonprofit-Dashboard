@@ -294,19 +294,81 @@ body, html {
         box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.75); }
 
 #news {
-  width: 500px;
+  margin: 50px 2%;
+  width: 96%;
+  height: 700px;
+  display: block;
+  color: black;
+  text-align: center;
+  text-decoration: none; }
+  @media all and (min-width: 500px) {
+    #news {
+      width: 500px;
+      margin: 50px auto; } }
+  #news .section-title {
+    padding: 25px 15px;
+    transition: all 0.5s ease; }
+  #news .news {
+    text-align: center;
+    height: 600px;
+    transition: all 0.5s ease; }
+    #news .news .news-title {
+      transition: all 0.5s ease;
+      padding: 15px 10px; }
+    #news .news .news-img {
+      width: 300px;
+      height: 350px;
+      padding: 5px;
+      border: 3px solid #342E37; }
+    #news .news .news-desc {
+      padding: 0 50px; }
+    #news .news .news-date {
+      display: block;
+      font-weight: 700;
+      padding: 15px 10px;
+      transition: all 0.5s ease; }
+    #news .news:hover {
+      -webkit-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      background-color: #FAFFFD; }
+      #news .news:hover .news-title {
+        color: #A2D729; }
+      #news .news:hover .news-date {
+        color: #FA824C; }
+  #news:hover .section-title {
+    -webkit-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+    transform: translateY(-15px);
+    color: #A2D729;
+    background-color: #342E37; }
+
+#pages {
+  width: 100%;
   height: 600px;
-  background-color: yellow;
-  margin: 0 auto; }
+  background-color: aqua;
+  margin: 0 auto;
+  display: flex; }
+  #pages .page {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    margin: 25px 50px;
+    width: 300px;
+    height: 500px;
+    z-index: 100; }
+    #pages .page:hover {
+      background-color: yellow; }
+    #pages .page .page-frame {
+      position: absolute;
+      z-index: -5;
+      width: 300px;
+      height: 500px; }
 
 .dashboard-container {
   display: flex;
   flex-flow: wrap; }
-  .dashboard-container #pages {
-    width: 100%;
-    height: 400px;
-    background-color: aqua;
-    margin: 0 auto; }
 
 .action-button {
   width: 75px;

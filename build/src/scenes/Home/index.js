@@ -4,6 +4,7 @@ import Event from "./Event/index.js";
 import Carousel from "./Carousel/index.js";
 import Gallery from "./Gallery/index.js";
 import News from "./News/index.js";
+import Pages from "./Pages/index.js";
 
 export default class Home extends React.Component {
   render() {
@@ -14,7 +15,7 @@ export default class Home extends React.Component {
         <News></News>
         <Gallery></Gallery>
         <Carousel></Carousel>
-        <div className="dashboard-component" id="pages"></div>
+        <Pages></Pages>
       </div>
     )
   }
