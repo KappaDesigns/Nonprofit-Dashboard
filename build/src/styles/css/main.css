@@ -361,6 +361,7 @@ body, html {
     #pages .page:hover {
       background-color: yellow; }
     #pages .page .page-frame {
+      pointer-events: none;
       position: absolute;
       z-index: -5;
       width: 300px;

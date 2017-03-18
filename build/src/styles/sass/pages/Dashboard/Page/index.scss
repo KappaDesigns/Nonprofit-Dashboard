@@ -16,6 +16,7 @@
 			background-color: yellow;
 		}
 		.page-frame {
+			pointer-events: none;
 			position: absolute;
 			z-index: -5;
 			width: 300px;
