@@ -2,7 +2,8 @@ const redis = require('redis');
 const client = redis.createClient();
 
 function addHistory(data, next) {
-	client.lpush(`history`, data, (err, res) => {
+	let jsonString = JSON.stringify(data);
+	client.lpush(`history`, jsonString, (err, res) => {
 		if (err) {
 			return next(err);
 		}
@@ -20,3 +21,6 @@ function getHistory(page, next) {
 		return next(null, res);
 	})
 }
+
+module.exports.getHistory = getHistory;
+module.exports.addHistory = addHistory;

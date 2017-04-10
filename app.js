@@ -16,6 +16,7 @@ const gallery = require('./routes/gallery');
 const carousel = require('./routes/carousel');
 const events = require('./routes/events');
 const editor = require('./routes/editor');
+const history = require('./routes/history');
 
 //data
 const User = require('./routes/data/User');
@@ -56,6 +57,7 @@ app.use('/api', gallery);
 app.use('/api', carousel);
 app.use('/api', events);
 app.use('/api', editor);
+app.use('/api', history);
 
 app.use('/', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, 'build', 'index.html'))

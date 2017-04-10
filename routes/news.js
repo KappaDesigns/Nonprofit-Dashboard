@@ -18,8 +18,14 @@ router.post('/news/:id', (req, res, next) => {
   if (req.isAuthenticated()) {
     History.addHistory({
       type: `News [New]`,
-      date: new Date(),
+      date: new Date().valueOf(),
       user: req.user
+    }, (err, res) => {
+      if (err) {
+        res.status(500).send({
+          message: 'Error Adding History'
+        })
+      }
     })
     News.create(req.params.id, req.body, data => {
       res.send(data);
@@ -35,8 +41,14 @@ router.put('/news/:id', (req, res, next) => {
   if (req.isAuthenticated()) {
     History.addHistory({
       type: `News [Edit]`,
-      date: new Date(),
+      date: new Date().valueOf(),
       user: req.user
+    }, (err, res) => {
+      if (err) {
+        res.status(500).send({
+          message: 'Error Adding History'
+        })
+      }
     })
     News.put(req.params.id, req.body, (data) => {
       res.send(data);
@@ -52,8 +64,14 @@ router.delete('/news/:id', (req, res, next) => {
   if (req.isAuthenticated()) {
     History.addHistory({
       type: `News [Delete]`,
-      date: new Date(),
+      date: new Date().valueOf(),
       user: req.user
+    }, (err, res) => {
+      if (err) {
+        res.status(500).send({
+          message: 'Error Adding History'
+        })
+      }
     })
     News.delete(req.params.id, (data) => {
       res.send(data);

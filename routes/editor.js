@@ -14,8 +14,14 @@ router.put('/editor/:page', (req, res, next) => {
     Editor.put(req.params.page, req.body, (data) => {
       History.addHistory({
         type: `Page [${req.params.page}]`,
-        date: new Date(),
+        date: new Date().valueOf(),
         user: req.user
+      }, (err, res) => {
+        if (err) {
+          res.status(500).send({
+            message: 'Error Adding History'
+          })
+        }
       })
       res.send(data);
     })

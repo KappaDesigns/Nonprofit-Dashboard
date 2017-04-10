@@ -18,6 +18,8 @@
     padding: 25px 15px;
   }
   .history-row {
+    display: block;
+    text-decoration: none;
     border-top: 1px solid black;
     &:last-child {
       border-bottom: 1px solid black;
@@ -70,7 +72,7 @@
     }
     transition:all 0.25s linear;
     &:hover {
-      cursor: default;
+      cursor: pointer;
       background-color: #342E37;
       color: #FAFFFD;
       .edit-date {

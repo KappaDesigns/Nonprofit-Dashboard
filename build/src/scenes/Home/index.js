@@ -14,7 +14,7 @@ export default class Home extends React.Component {
         <Event></Event>
         <News></News>
         <Gallery></Gallery>
-        <Carousel></Carousel>
+        <Carousel id={1}></Carousel>
         <Pages></Pages>
       </div>
     )

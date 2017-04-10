@@ -20,7 +20,7 @@ export default class Carousel extends React.Component {
 
 	render() {
 		return (
-			<Link to="/carousel/id" className="dashboard-component" id="carousel">
+			<Link to={`/carousel/`} className="dashboard-component" id="carousel">
 				<h1 className="carousel-title">Carousel</h1>
 				<div className="carousel-slider">
 					<div className="slide" id="#slide-1">
