@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Editor = require('./data/Editor');
+const History = require('./data/History');
 
 router.get('/editor/:page', (req, res, next) => {
   Editor.get(req.params.page, (data) => {
@@ -11,6 +12,11 @@ router.get('/editor/:page', (req, res, next) => {
 router.put('/editor/:page', (req, res, next) => {
   if (req.isAuthenticated()) {
     Editor.put(req.params.page, req.body, (data) => {
+      History.addHistory({
+        type: `Page [${req.params.page}]`,
+        date: new Date(),
+        user: req.user
+      })
       res.send(data);
     })
   } else {

@@ -8,15 +8,15 @@ export default class Pages extends React.Component  {
 		this.state = {
 			pages: [
 				{
-					src: "http://cnn.com",
+					src: "http://kappadesigns.org",
 					title: "Home"
 				},
 				{
-					src: "http://cnn.com",
+					src: "http://blog.kappadesigns.org",
 					title: "About"
 				},
 				{
-					src: "http://cnn.com",
+					src: "http://mundanewebsitename.me",
 					title: "Contact"
 				}
 			]
@@ -26,13 +26,16 @@ export default class Pages extends React.Component  {
 	render() {
 		return (
 			<div className="dashboard-component" id="pages">
-				{
-					this.state.pages.map((page, i) => {
-						return (
-							<Page key={i} page={page}></Page>
-						)
-					})
-				}
+				<h1 className="page-title">Pages</h1>
+				<div className="pages-container">
+					{
+						this.state.pages.map((page, i) => {
+							return (
+								<Page key={i} page={page}></Page>
+							)
+						})
+					}
+				</div>
 			</div>
 		)
 	}

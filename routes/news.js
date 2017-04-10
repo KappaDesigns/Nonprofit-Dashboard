@@ -16,6 +16,11 @@ router.get('/news/:id', (req, res, next) => {
 
 router.post('/news/:id', (req, res, next) => {
   if (req.isAuthenticated()) {
+    History.addHistory({
+      type: `News [New]`,
+      date: new Date(),
+      user: req.user
+    })
     News.create(req.params.id, req.body, data => {
       res.send(data);
     })
@@ -28,6 +33,11 @@ router.post('/news/:id', (req, res, next) => {
 
 router.put('/news/:id', (req, res, next) => {
   if (req.isAuthenticated()) {
+    History.addHistory({
+      type: `News [Edit]`,
+      date: new Date(),
+      user: req.user
+    })
     News.put(req.params.id, req.body, (data) => {
       res.send(data);
     })
@@ -40,6 +50,11 @@ router.put('/news/:id', (req, res, next) => {
 
 router.delete('/news/:id', (req, res, next) => {
   if (req.isAuthenticated()) {
+    History.addHistory({
+      type: `News [Delete]`,
+      date: new Date(),
+      user: req.user
+    })
     News.delete(req.params.id, (data) => {
       res.send(data);
     })
