@@ -38,7 +38,7 @@ export default class Carousel extends React.Component {
         backgroundRepeat: `no-repeat`,
         backgroundImage: `url(${slide.src})`
       }
-      if (index - 1 == self.state.currentSlideIndex) {
+      if (index == self.state.currentSlideIndex) {
         return (
           <div onClick={this.handleActive} id={`slide-${index}`} key={index} draggable style={style} className="draggable-slide active"></div>
         )
@@ -98,7 +98,9 @@ export default class Carousel extends React.Component {
   }
 
   handleActive(e) {
-    let index = e.target.id.split("-")[1] - 1;
+    let index = e.target.id.split("-")[1];
+    console.log(index);
+    console.log(this.state.currentCarousel[index]);
     this.setState({
       currentSlideIndex: index,
       currentSlide: this.state.currentCarousel[index]
