@@ -13,6 +13,12 @@ export default class Carousel extends React.Component {
     this.handleActive = this.handleActive.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleBackgroundChange = this.handleBackgroundChange.bind(this);
+    this.handleURLClose = this.handleURLClose.bind(this);
+    this.handleURLChange = this.handleURLChange.bind(this);
+    this.handleDragStart = this.handleDragStart.bind(this);
+    this.handleDragDrop = this.handleDragDrop.bind(this);
+    this.handleDragOver = this.handleDragOver.bind(this);
   }
 
   componentWillMount() {
@@ -30,6 +36,7 @@ export default class Carousel extends React.Component {
       backgroundImage: `url(${this.state.currentSlide.src})`,
       backgroundSize: `cover`,
       backgroundRepeat: `no-repeat`,
+      backgroundPosition: 'center'
     }
 
     let createSlide = (slide, index) => {
@@ -40,35 +47,68 @@ export default class Carousel extends React.Component {
       }
       if (index == self.state.currentSlideIndex) {
         return (
-          <div onClick={this.handleActive} id={`slide-${index}`} key={index} draggable style={style} className="draggable-slide active"></div>
+          <div onDragOver={this.handleDragOver} onDrop={this.handleDragDrop} onDragStart={this.handleDragStart} onClick={this.handleActive} id={`slide-${index}`} key={index} draggable style={style} className="draggable-slide active"></div>
         )
       } else {
         return (
-          <div onClick={this.handleActive} id={`slide-${index}`} key={index} draggable style={style} className="draggable-slide"></div>
+          <div onDragOver={this.handleDragOver} onDrop={this.handleDragDrop} onDragStart={this.handleDragStart} onClick={this.handleActive} id={`slide-${index}`} key={index} draggable style={style} className="draggable-slide"></div>
         )
       }
     }
-
+    let hidden = `image-change-container ${this.getHiddenState()}`;
     return (
       <div className="carousel-container">
         <h1 className="header">Edit Carousel</h1>
-        <div style={style} className="carousel-display">
+        <div onDoubleClick={this.handleBackgroundChange} style={style} className="carousel-display">
           <div className="desc-container">
             <textarea onChange={this.handleEdit} value={this.state.currentSlide.desc} className="desc" type="text"></textarea>
           </div>
           <span onClick={this.handleDelete} className="remove-slide">Delete Slide</span>
+          <div className={hidden}>
+            <div className="modal-header">
+              <h3 className="background-header">Change Background URL</h3>
+              <span onClick={this.handleURLClose}  className="close-background">X</span>
+            </div>
+            <input value={this.state.currentSlide.src} onChange={this.handleURLChange} className="background-url" type="text" placeholder="url..."/>
+          </div>
         </div>
-
+        <span onClick={this.handleAdd} className="add-slide">Add Slide</span>
         <div className="carousel-controls">
           <span onClick={this.handlePrev} className="prev">{"<"}</span>
           <span onClick={this.handleNext} className="next">{">"}</span>
         </div>
 
-        <div className="carousel-order">
-          {this.props.carousel.map(createSlide, 0)}
+        <div className="scroll-container">
+          <div className="carousel-order">
+            {this.props.carousel.map(createSlide, 0)}
+          </div>
         </div>
       </div>
     )
+  }
+
+  handleURLChange(e) {
+    let slide = this.state.currentSlide;
+    slide.src = e.target.value;
+    this.setState({
+      currentSlide: slide
+    })
+  }
+
+  handleURLClose() {
+    let slide = this.state.currentSlide;
+    slide.isHidden = !slide.isHidden;
+    this.setState({
+      currentSlide: slide
+    })
+  }
+
+  getHiddenState() {
+    if (this.state.currentSlide.isHidden) {
+      return "hidden";
+    } else {
+      return "";
+    }
   }
 
   handleNext() {
@@ -99,8 +139,6 @@ export default class Carousel extends React.Component {
 
   handleActive(e) {
     let index = e.target.id.split("-")[1];
-    console.log(index);
-    console.log(this.state.currentCarousel[index]);
     this.setState({
       currentSlideIndex: index,
       currentSlide: this.state.currentCarousel[index]
@@ -115,12 +153,57 @@ export default class Carousel extends React.Component {
     })
   }
 
+  handleBackgroundChange() {
+    let slide = this.state.currentSlide;
+    slide.isHidden = !slide.isHidden;
+    this.setState({
+      currentSlide: slide
+    })
+  }
+
   handleDelete() {
     let index = this.state.currentSlideIndex;
     this.state.currentCarousel.splice(index, 1);
+    if (index == this.state.currentCarousel.length) {
+      index--;
+    }
     this.setState({
+      currentSlideIndex: index,
       currentSlide: this.state.currentCarousel[index],
     })
+  }
+
+  handleDragStart(e) {
+    e.dataTransfer.setData("text/plain", e.target.id);
+  }
+
+  handleDragOver(e) {
+    e.preventDefault();
+  }
+
+  handleDragDrop(e) {
+    e.preventDefault();
+    let index1 = e.dataTransfer.getData("text");
+    index1 = index1.substring(6, index1.length);
+    let index2 = e.target.id;
+    index2 = index2.substring(6, index2.length);
+    console.log(index1, index2);
+    if (index1 != index2) {
+      let carousel = this.state.currentCarousel;
+      console.log(carousel);
+      let slide = carousel[index1];
+      carousel.splice(index1, 1);
+      carousel.splice(index2, 0, slide);
+      this.setState({
+        currentCarousel: carousel,
+        currentSlide: carousel[index2],
+        currentSlideIndex: index2
+      })
+    }
+  }
+
+  handleDragDiv(e) {
+    e.preventDefault();
   }
 
   handleAdd() {

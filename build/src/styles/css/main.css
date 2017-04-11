@@ -411,7 +411,7 @@ body, html {
   .carousel-container .carousel-display {
     width: 80%;
     max-width: 1000px;
-    height: 600px;
+    height: 500px;
     margin: 25px auto; }
     .carousel-container .carousel-display .desc-container {
       height: 100px;
@@ -424,7 +424,7 @@ body, html {
         font-weight: 600;
         padding-left: 25px;
         padding-top: 25px;
-        width: 80%;
+        width: 100%;
         resize: none;
         line-height: 1.5; }
         .carousel-container .carousel-display .desc-container .desc:hover {
@@ -432,6 +432,52 @@ body, html {
         .carousel-container .carousel-display .desc-container .desc:focus {
           border-bottom: 2px solid white;
           outline: none; }
+    .carousel-container .carousel-display .image-change-container {
+      padding-bottom: 15px;
+      background-color: #342E37;
+      color: white;
+      width: 50%;
+      -webkit-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
+      margin: 0 auto; }
+      .carousel-container .carousel-display .image-change-container .modal-header {
+        display: flex;
+        text-align: center;
+        border-bottom: 1px solid black; }
+        .carousel-container .carousel-display .image-change-container .modal-header .background-header {
+          padding: 0;
+          margin: 0;
+          padding-top: 10px;
+          padding-bottom: 5px;
+          width: 90%; }
+        .carousel-container .carousel-display .image-change-container .modal-header .close-background {
+          border-left: 1px solid black;
+          padding-top: 10px;
+          width: 10%;
+          font-weight: 800;
+          transition: all 0.5s ease; }
+          .carousel-container .carousel-display .image-change-container .modal-header .close-background:hover {
+            color: #FA824C;
+            background-color: white;
+            cursor: pointer; }
+      .carousel-container .carousel-display .image-change-container .background-url {
+        font-size: 16px;
+        display: block;
+        border: none;
+        color: white;
+        border-bottom: 2px solid white;
+        background-color: transparent;
+        width: 80%;
+        margin: 25px auto;
+        transition: border-bottom 0.25s ease; }
+        .carousel-container .carousel-display .image-change-container .background-url:hover {
+          border-bottom: 2px solid #A2D729; }
+        .carousel-container .carousel-display .image-change-container .background-url:focus {
+          border-bottom: 2px solid #A2D729;
+          outline: none; }
+    .carousel-container .carousel-display .hidden {
+      display: none; }
     .carousel-container .carousel-display .remove-slide {
       width: 200px;
       max-width: 100px;
@@ -447,6 +493,21 @@ body, html {
         color: #FA824C;
         cursor: pointer;
         transform: scale(1.2); }
+  .carousel-container .add-slide {
+    width: 200px;
+    max-width: 100px;
+    display: block;
+    margin: 25px auto;
+    color: #342E37;
+    background-color: white;
+    text-align: center;
+    border: 2px solid #A2D729;
+    padding: 5px 10px;
+    transition: transform 0.5s ease; }
+    .carousel-container .add-slide:hover {
+      color: #A2D729;
+      cursor: pointer;
+      transform: scale(1.2); }
   .carousel-container .carousel-controls .prev, .carousel-container .carousel-controls .next {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -457,7 +518,7 @@ body, html {
     display: block;
     position: absolute;
     color: #FA824C;
-    font-size: 100px;
+    font-size: 80px;
     transition: all 0.5s ease;
     padding: 0 25px;
     top: 500px; }
@@ -472,27 +533,27 @@ body, html {
     left: 20%; }
   .carousel-container .carousel-controls .next {
     right: 20%; }
-  .carousel-container .carousel-order {
+  .carousel-container .scroll-container .carousel-order {
     display: flex;
     width: 90%;
     height: 300px;
     margin: 0 auto; }
     @media all and (max-width: 530px) {
-      .carousel-container .carousel-order {
+      .carousel-container .scroll-container .carousel-order {
         display: block; } }
-    .carousel-container .carousel-order .draggable-slide {
+    .carousel-container .scroll-container .carousel-order .draggable-slide {
       width: 250px;
       height: 200px;
       margin: 25px 10px;
       transition: transform 0.5s ease;
       padding: 3px; }
-      .carousel-container .carousel-order .draggable-slide:hover {
+      .carousel-container .scroll-container .carousel-order .draggable-slide:hover {
         transform: scale(1.1);
         cursor: pointer; }
       @media all and (max-width: 530px) {
-        .carousel-container .carousel-order .draggable-slide {
+        .carousel-container .scroll-container .carousel-order .draggable-slide {
           margin: 25px auto; } }
-    .carousel-container .carousel-order .active {
+    .carousel-container .scroll-container .carousel-order .active {
       padding: 0;
       border: 3px solid #A2D729; }
 
@@ -598,7 +659,6 @@ body, html {
     display: block;
     font-size: 12px;
     width: 20%;
-    height: 100%;
     line-height: 75px; }
     @media all and (min-width: 560px) {
       .navbar .navbar-link {
