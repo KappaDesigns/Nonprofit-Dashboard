@@ -432,6 +432,74 @@ body, html {
         .carousel-container .carousel-display .desc-container .desc:focus {
           border-bottom: 2px solid white;
           outline: none; }
+    .carousel-container .carousel-display .add-modal {
+      background-color: #342E37;
+      width: 50%;
+      margin: 0 auto;
+      color: white;
+      padding-bottom: 15px; }
+      .carousel-container .carousel-display .add-modal .modal-header {
+        transition: all 0.5s ease;
+        display: flex;
+        text-align: center;
+        border-bottom: 1px solid black; }
+        .carousel-container .carousel-display .add-modal .modal-header .add-header {
+          padding: 0;
+          margin: 0;
+          padding-top: 10px;
+          padding-bottom: 5px;
+          width: 90%; }
+        .carousel-container .carousel-display .add-modal .modal-header .close-add {
+          border-left: 1px solid black;
+          padding-top: 10px;
+          width: 10%;
+          min-width: 25px;
+          font-weight: 800;
+          transition: all 0.5s ease; }
+          .carousel-container .carousel-display .add-modal .modal-header .close-add:hover {
+            color: #FA824C;
+            background-color: white;
+            cursor: pointer; }
+      .carousel-container .carousel-display .add-modal .modal-body {
+        display: flex; }
+        .carousel-container .carousel-display .add-modal .modal-body .input {
+          width: 50%;
+          height: 75px;
+          text-align: center; }
+          .carousel-container .carousel-display .add-modal .modal-body .input .input-header {
+            margin: 0;
+            padding: 0;
+            margin-top: 25px; }
+          .carousel-container .carousel-display .add-modal .modal-body .input .modal-input {
+            font-size: 16px;
+            display: block;
+            border: none;
+            color: white;
+            border-bottom: none;
+            background-color: transparent;
+            width: 80%;
+            margin: 10px auto;
+            transition: border-bottom 0.25s ease; }
+            .carousel-container .carousel-display .add-modal .modal-body .input .modal-input:hover {
+              border-bottom: 2px solid white; }
+            .carousel-container .carousel-display .add-modal .modal-body .input .modal-input:focus {
+              border-bottom: 2px solid #A2D729;
+              outline: none; }
+      .carousel-container .carousel-display .add-modal .add-btn {
+        width: 200px;
+        max-width: 100px;
+        display: block;
+        margin: 25px auto;
+        color: #342E37;
+        background-color: white;
+        text-align: center;
+        border: 2px solid #FA824C;
+        padding: 5px 10px;
+        transition: transform 0.5s ease; }
+        .carousel-container .carousel-display .add-modal .add-btn:hover {
+          color: #FA824C;
+          cursor: pointer;
+          transform: scale(1.2); }
     .carousel-container .carousel-display .image-change-container {
       padding-bottom: 15px;
       background-color: #342E37;
@@ -442,6 +510,7 @@ body, html {
       box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.75);
       margin: 0 auto; }
       .carousel-container .carousel-display .image-change-container .modal-header {
+        transition: all 0.5s ease;
         display: flex;
         text-align: center;
         border-bottom: 1px solid black; }
@@ -455,24 +524,29 @@ body, html {
           border-left: 1px solid black;
           padding-top: 10px;
           width: 10%;
+          min-width: 25px;
           font-weight: 800;
           transition: all 0.5s ease; }
           .carousel-container .carousel-display .image-change-container .modal-header .close-background:hover {
             color: #FA824C;
             background-color: white;
             cursor: pointer; }
+      .carousel-container .carousel-display .image-change-container:hover .modal-header {
+        border-color: #FA824C; }
+        .carousel-container .carousel-display .image-change-container:hover .modal-header .close-background {
+          border-color: #FA824C; }
       .carousel-container .carousel-display .image-change-container .background-url {
         font-size: 16px;
         display: block;
         border: none;
         color: white;
-        border-bottom: 2px solid white;
+        border-bottom: none;
         background-color: transparent;
         width: 80%;
         margin: 25px auto;
         transition: border-bottom 0.25s ease; }
         .carousel-container .carousel-display .image-change-container .background-url:hover {
-          border-bottom: 2px solid #A2D729; }
+          border-bottom: 2px solid white; }
         .carousel-container .carousel-display .image-change-container .background-url:focus {
           border-bottom: 2px solid #A2D729;
           outline: none; }
@@ -533,29 +607,31 @@ body, html {
     left: 20%; }
   .carousel-container .carousel-controls .next {
     right: 20%; }
-  .carousel-container .scroll-container .carousel-order {
-    display: flex;
-    width: 90%;
-    height: 300px;
-    margin: 0 auto; }
-    @media all and (max-width: 530px) {
-      .carousel-container .scroll-container .carousel-order {
-        display: block; } }
-    .carousel-container .scroll-container .carousel-order .draggable-slide {
-      width: 250px;
-      height: 200px;
-      margin: 25px 10px;
-      transition: transform 0.5s ease;
-      padding: 3px; }
-      .carousel-container .scroll-container .carousel-order .draggable-slide:hover {
-        transform: scale(1.1);
-        cursor: pointer; }
+  .carousel-container .scroll-container {
+    overflow-x: scroll; }
+    .carousel-container .scroll-container .carousel-order {
+      display: flex;
+      overflow-x: scroll;
+      height: 300px;
+      margin: 0 auto; }
       @media all and (max-width: 530px) {
-        .carousel-container .scroll-container .carousel-order .draggable-slide {
-          margin: 25px auto; } }
-    .carousel-container .scroll-container .carousel-order .active {
-      padding: 0;
-      border: 3px solid #A2D729; }
+        .carousel-container .scroll-container .carousel-order {
+          display: block; } }
+      .carousel-container .scroll-container .carousel-order .draggable-slide {
+        width: 250px;
+        height: 200px;
+        margin: 25px 10px;
+        transition: transform 0.5s ease;
+        padding: 3px; }
+        .carousel-container .scroll-container .carousel-order .draggable-slide:hover {
+          transform: scale(1.1);
+          cursor: pointer; }
+        @media all and (max-width: 530px) {
+          .carousel-container .scroll-container .carousel-order .draggable-slide {
+            margin: 25px auto; } }
+      .carousel-container .scroll-container .carousel-order .active {
+        padding: 0;
+        border: 3px solid #A2D729; }
 
 .action-button {
   width: 75px;

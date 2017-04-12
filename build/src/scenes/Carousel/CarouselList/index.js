@@ -4,7 +4,7 @@ export default class Carousel extends React.Component {
   render() {
     return (
       <div>
-        Yay
+        Carousel List
       </div>
     )
   }

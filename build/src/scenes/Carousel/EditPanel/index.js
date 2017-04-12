@@ -1,4 +1,7 @@
 import React from "react";
+import SlideEditor from "./SlideEditor/index.js";
+import CarouselControls from "./CarouselControls/index.js";
+import SlideOrderer from "./SlideOrderer/index.js";
 
 export default class Carousel extends React.Component {
   constructor() {
@@ -13,12 +16,12 @@ export default class Carousel extends React.Component {
     this.handleActive = this.handleActive.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
-    this.handleBackgroundChange = this.handleBackgroundChange.bind(this);
     this.handleURLClose = this.handleURLClose.bind(this);
     this.handleURLChange = this.handleURLChange.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleDragDrop = this.handleDragDrop.bind(this);
     this.handleDragOver = this.handleDragOver.bind(this);
+    this.handleAddSlide = this.handleAddSlide.bind(this);
   }
 
   componentWillMount() {
@@ -31,58 +34,30 @@ export default class Carousel extends React.Component {
 
   render() {
     let index = 0;
-    let self = this;
     let style = {
       backgroundImage: `url(${this.state.currentSlide.src})`,
       backgroundSize: `cover`,
       backgroundRepeat: `no-repeat`,
       backgroundPosition: 'center'
     }
-
-    let createSlide = (slide, index) => {
-      let style = {
-        backgroundSize: `cover`,
-        backgroundRepeat: `no-repeat`,
-        backgroundImage: `url(${slide.src})`
-      }
-      if (index == self.state.currentSlideIndex) {
-        return (
-          <div onDragOver={this.handleDragOver} onDrop={this.handleDragDrop} onDragStart={this.handleDragStart} onClick={this.handleActive} id={`slide-${index}`} key={index} draggable style={style} className="draggable-slide active"></div>
-        )
-      } else {
-        return (
-          <div onDragOver={this.handleDragOver} onDrop={this.handleDragDrop} onDragStart={this.handleDragStart} onClick={this.handleActive} id={`slide-${index}`} key={index} draggable style={style} className="draggable-slide"></div>
-        )
-      }
+    let width = {
+      width: 250 * this.state.currentCarousel.length + 25 * this.state.currentCarousel.length - 1
     }
-    let hidden = `image-change-container ${this.getHiddenState()}`;
     return (
       <div className="carousel-container">
         <h1 className="header">Edit Carousel</h1>
-        <div onDoubleClick={this.handleBackgroundChange} style={style} className="carousel-display">
-          <div className="desc-container">
-            <textarea onChange={this.handleEdit} value={this.state.currentSlide.desc} className="desc" type="text"></textarea>
-          </div>
-          <span onClick={this.handleDelete} className="remove-slide">Delete Slide</span>
-          <div className={hidden}>
-            <div className="modal-header">
-              <h3 className="background-header">Change Background URL</h3>
-              <span onClick={this.handleURLClose}  className="close-background">X</span>
-            </div>
-            <input value={this.state.currentSlide.src} onChange={this.handleURLChange} className="background-url" type="text" placeholder="url..."/>
-          </div>
-        </div>
-        <span onClick={this.handleAdd} className="add-slide">Add Slide</span>
-        <div className="carousel-controls">
-          <span onClick={this.handlePrev} className="prev">{"<"}</span>
-          <span onClick={this.handleNext} className="next">{">"}</span>
-        </div>
+        
+        <SlideEditor customStyle={style} slide={this.state.currentSlide} handleSlideRemove={this.handleDelete}
+        handleURLModalClose={this.handleURLClose} handleURLChange={this.handleURLChange}
+        handleAddSlide={this.handleAddSlide} handleDescEdit={this.handleEdit}>
+        </SlideEditor>
 
-        <div className="scroll-container">
-          <div className="carousel-order">
-            {this.props.carousel.map(createSlide, 0)}
-          </div>
-        </div>
+        <CarouselControls handleNext={this.handleNext} handlePrev={this.handlePrev}></CarouselControls>
+
+        <SlideOrderer handleDragOver={this.handleDragOver} handleDragDrop={this.handleDragDrop}
+        handleDragStart={this.handleDragStart} handleActive={this.handleActive} scrollWidth={width}
+        carousel={this.state.currentCarousel} slideIndex={this.state.currentSlideIndex}>
+        </SlideOrderer>
       </div>
     )
   }
@@ -101,14 +76,6 @@ export default class Carousel extends React.Component {
     this.setState({
       currentSlide: slide
     })
-  }
-
-  getHiddenState() {
-    if (this.state.currentSlide.isHidden) {
-      return "hidden";
-    } else {
-      return "";
-    }
   }
 
   handleNext() {
@@ -153,14 +120,6 @@ export default class Carousel extends React.Component {
     })
   }
 
-  handleBackgroundChange() {
-    let slide = this.state.currentSlide;
-    slide.isHidden = !slide.isHidden;
-    this.setState({
-      currentSlide: slide
-    })
-  }
-
   handleDelete() {
     let index = this.state.currentSlideIndex;
     this.state.currentCarousel.splice(index, 1);
@@ -187,10 +146,8 @@ export default class Carousel extends React.Component {
     index1 = index1.substring(6, index1.length);
     let index2 = e.target.id;
     index2 = index2.substring(6, index2.length);
-    console.log(index1, index2);
     if (index1 != index2) {
       let carousel = this.state.currentCarousel;
-      console.log(carousel);
       let slide = carousel[index1];
       carousel.splice(index1, 1);
       carousel.splice(index2, 0, slide);
@@ -206,7 +163,18 @@ export default class Carousel extends React.Component {
     e.preventDefault();
   }
 
-  handleAdd() {
-
+  handleAddSlide(url, desc, isValid) {
+    let carousel = this.state.currentCarousel;
+    if (isValid) {
+      let data = {
+        src: url,
+        desc: desc,
+        isHidden: true
+      }
+      carousel.push(data);
+      this.setState({
+        currentCarousel: carousel
+      })
+    }
   }
 }
