@@ -633,6 +633,27 @@ body, html {
         padding: 0;
         border: 3px solid #A2D729; }
 
+.carousel-row {
+  max-width: 100%;
+  overflow-x: scroll; }
+  .carousel-row .carousel-page-header {
+    text-align: center;
+    text-transform: capitalize; }
+  .carousel-row .carousel-page-continer {
+    width: 100%;
+    display: flex;
+    overflow: scroll; }
+    .carousel-row .carousel-page-continer .carousel-display {
+      width: 250px;
+      height: 200px;
+      margin: 25px;
+      transition: transform 0.5s ease; }
+      .carousel-row .carousel-page-continer .carousel-display:hover {
+        cursor: pointer;
+        transform: scale(1.1); }
+    .carousel-row .carousel-page-continer .active {
+      border: 5px solid #A2D729; }
+
 .action-button {
   width: 75px;
   height: 75px;

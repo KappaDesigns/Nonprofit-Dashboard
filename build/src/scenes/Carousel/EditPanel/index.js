@@ -32,6 +32,14 @@ export default class Carousel extends React.Component {
     })
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      currentCarousel: props.carousel,
+      currentSlide: props.carousel[0],
+      currentSlideIndex: 0
+    })
+  }
+
   render() {
     let index = 0;
     let style = {
@@ -46,7 +54,7 @@ export default class Carousel extends React.Component {
     return (
       <div className="carousel-container">
         <h1 className="header">Edit Carousel</h1>
-        
+
         <SlideEditor customStyle={style} slide={this.state.currentSlide} handleSlideRemove={this.handleDelete}
         handleURLModalClose={this.handleURLClose} handleURLChange={this.handleURLChange}
         handleAddSlide={this.handleAddSlide} handleDescEdit={this.handleEdit}>
