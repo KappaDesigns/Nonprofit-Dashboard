@@ -48,55 +48,5 @@ function setInit() {
 }
 
 function setupSite() {
-	downloadSite(conf.index)
-}
-
-function downloadSite(page) {
-	let path = `site/${page}.html`;
-	let url = `http://${page}`;
-	fs.writeFile(path, "", err => {
-		if (err) {
-			throw err;
-		}
-		let file = fs.createWriteStream(path);
-		let req = http.get(url, res => {
-			res.pipe(file).on('finish', () => {
-				readFile(path);
-			});
-
-		})
-	})
-}
-
-function readFile(path) {
-	fs.readFile(path, 'utf8', (err, data) => {
-		if (err) {
-			throw err;
-		}
-		let DOM = new MockDOM(data);
-		saveDOM(path, DOM);
-		recurseDOM(DOM.body, 0);
-	})
-}
-
-function saveDOM(path, DOM) {
-	path = path.replace('site/', '');
-	path = path.replace('.html', '');
-	console.log(path);
-	let serial = JSON.stringify(DOM);
-	client.set(`page:${path}`, serial, err => {
-		if (err) {
-			throw err;
-		}
-	})
-}
-
-function recurseDOM(current, nesting) {
-	for (let i = 0; i < current.children.length; i++) {
-		let str = "";
-		for (let i = 0; i < nesting; i++) {
-			str += '\t';
-		}
-		recurseDOM(current.children[i], nesting + 1);
-	}
+	crawler.crawl();
 }
