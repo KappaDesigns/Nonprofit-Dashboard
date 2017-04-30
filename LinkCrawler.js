@@ -48,17 +48,21 @@ class LinkCrawler {
 			if (err) {
 				throw err;
 			}
-			let DOM = new MockDOM(data);
-			this.saveDOM(path, DOM);
+			let DOM = new MockDOM(data, path, this.saveDOM);
 			this.recurseDOM(this.getStartTag(DOM.DOM), 0);
 		})
 	}
 
-	saveDOM(path, DOM) {
-		path = path.replace('site/', '');
-		path = path.replace('.html', '');
+	saveDOM(DOM) {
+		DOM.path = DOM.path.replace('site/', '');
+		DOM.path = DOM.path.replace('.html', '');
 		let serial = JSON.stringify(DOM);
-		client.set(`page:${path}`, serial, err => {
+		client.hmset(`DomMap`, DOM.path, DOM.id, err => {
+			if (err) {
+				throw err;
+			}
+		})
+		client.set(`page:${DOM.id}`, serial, err => {
 			if (err) {
 				throw err;
 			}

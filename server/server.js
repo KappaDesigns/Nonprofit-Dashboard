@@ -1,52 +1,14 @@
-const http = require('http');
-const port = 3000;
-const util = require('../index');
-const conf = require('./config');
-const fs = require('fs');
-const redis = require('redis');
+const Express = require("express");
+const app = Express();
 
-const MockDOM = require('../MockDOM');
-const Crawler = require('../LinkCrawler');
-const client = redis.createClient();
+const config = require('./config');
 
-const crawler = new Crawler(conf.index);
+//routes
+const page = require('./routes/page');
 
-const requestHandler = (req, res) => {
-	util.getDOM((DOM) => {
-		res.end(JSON.stringify(DOM));
-	});
-}
+app.use('/api', page);
 
-const server = http.createServer(requestHandler);
-
-server.listen(port, (err) => {
-	if (err) {
-		return console.error(err);
-	}
-	handleInit();
-	console.log(`Server is listening on port ${port}`);
+app.listen(config.port, () => {
+	console.log(`App listening on port:${config.port}`);
+	config.handleInit();
 })
-
-function handleInit() {
-	client.get("initialized", (err, key) => {
-		if (err) {
-			throw err;
-		}
-		if (key) {
-			setInit();
-		}
-	})
-}
-
-function setInit() {
-	client.set("initialized", true, err => {
-		if (err) {
-			throw err;
-		}
-	})
-	setupSite();
-}
-
-function setupSite() {
-	crawler.crawl();
-}
