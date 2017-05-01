@@ -41,11 +41,10 @@ export default class Page extends React.Component {
             src = "http://" + this.state.dom.path + "/" + src;
           }
           let htmlString = `<script src=${src}></script>`;
-          console.log(htmlString);
           $('body').append(htmlString)
         } else {
           // handle script tag no src
-          
+
         }
       }
       if (DOM[i].hasOwnProperty("children")) {
@@ -88,12 +87,12 @@ export default class Page extends React.Component {
     if (!item.hasOwnProperty("children") && item.type == "tag") {
       let Tag = "" + item.name;
       return (
-        <Tag key={index} id={opts.id} href={opts.href} class={opts.class}></Tag>
+        <Tag key={index} src={opts.src} id={opts.id} href={opts.href} class={opts.class}></Tag>
       )
     } else if (item.hasOwnProperty("children")) {
       let Tag = "" + item.name;
       return (
-        <Tag key={index} id={opts.id} href={opts.href} class={opts.class}>
+        <Tag key={index} id={opts.id} href={opts.href} src={opts.src} class={opts.class}>
           {
             item.children.map(this.renderDOM)
           }
@@ -110,13 +109,21 @@ export default class Page extends React.Component {
       opts = {
         class: item.attribs.class !== undefined ? item.attribs.class : "",
         id: item.attribs.id !== undefined ? item.attribs.id : "",
-        href: item.attribs.href !== undefined ? item.attribs.href : "#"
+        href: item.attribs.href !== undefined ? item.attribs.href : "#",
+        src: item.attribs.src !== undefined ? item.attribs.src : ""
       }
     } else {
       opts = {
         class: "",
         id: "",
-        href: "#"
+        href: "#",
+        src: ""
+      }
+    }
+    if (opts.src !== "") {
+      if (!opts.src.includes("http")) {
+        opts.src = opts.src.replace(this.state.dom.path);
+        opts.src = "http://" + this.state.dom.path + "/" + opts.src;
       }
     }
     return opts;
