@@ -1,3 +1,0 @@
-const CustomTag = `h${this.props.priority}`;
-
-<CustomTag>Hello</CustomTag >

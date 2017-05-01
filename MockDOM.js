@@ -10,7 +10,7 @@ class MockDOM {
 				throw err;
 			}
 			this.setDOM(dom, next);
-		})
+		}, { verbose: false, ignoreWhitespace: true })
 
 		let parser = new HtmlParser.Parser(handler);
 		parser.parseComplete(html);
@@ -22,7 +22,6 @@ class MockDOM {
 				throw err;
 			}
 			this.id = val;
-			console.log(this.id);
 			next(this);
 		})
 		this.DOM = DOM

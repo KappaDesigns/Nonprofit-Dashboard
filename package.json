@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "cheerio": "^0.22.0",
-    "mkdirp": "^0.5.1",
-    "request": "^2.81.0",
-    "slug": "^0.9.1"
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "webpack": "^2.4.1"
   },
   "devDependencies": {},
   "scripts": {

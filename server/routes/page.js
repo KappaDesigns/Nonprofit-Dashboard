@@ -1,21 +1,22 @@
 const Express = require('express');
 const router = Express.Router();
 const DOM = require('./data/dom');
-const config = require('../config');
+const config = require('../../config');
 
 router.get('/*', (req, res, next) => {
   getPageID(req, (err, id) => {
     if (err) {
-      res.redirect('/uhoh');
+      throw err;
     }
     if (id === null) {
-      res.send("DOM does not exist").status(401);
+      return res.send("DOM does not exist").status(401);
     }
     DOM.getDOM(id, (err, dom) => {
       if (err) {
-        res.redirect('/uhoh');
+        throw err;
       }
-      res.send(dom);
+      console.log(dom);
+      return res.send(dom);
     })
   })
 })
