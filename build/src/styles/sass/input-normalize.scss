@@ -1,0 +1,6 @@
+.admin-panel-editable-text {
+	display: inline-block;
+	&:focus {
+		outline: none !important;
+	}
+}

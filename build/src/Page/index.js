@@ -1,13 +1,18 @@
 import React from "react";
+import "es6-map/implement";
+import "whatwg-fetch";
 
 export default class Page extends React.Component {
 
   constructor() {
     super();
+    this.nesting = 0;
+    this.textMap = {};
     this.state = {
-
+      textMap: this.textMap
     }
     this.renderDOM = this.renderDOM.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
@@ -70,6 +75,7 @@ export default class Page extends React.Component {
   }
 
   render() {
+    this.nesting = 0;
     if (this.state.fetched) {
       return (
         <div>
@@ -80,8 +86,8 @@ export default class Page extends React.Component {
     return (<div></div>)
   }
 
-  renderDOM(item, index) {
-
+  renderDOM(item) {
+    let index = this.nesting++;
     let opts = this.getAttributes(item);
 
     if (!item.hasOwnProperty("children") && item.type == "tag") {
@@ -99,8 +105,20 @@ export default class Page extends React.Component {
         </Tag>
       )
     } else if (item.type == "text") {
-      return item.data;
+      this.textMap[index] = item
+      return (<span key={index} onKeyDown={this.handleChange} data-index={index} class="admin-panel-editable-text" contentEditable="true">{item.data}</span>);
     }
+  }
+
+  handleChange(e) {
+    console.log("bark");
+    let index = parseInt(e.target.dataset.index);
+    let map = this.state.textMap
+    map[index].data = e.target.textContent;
+    console.log(map[index].data);
+    this.setState({
+      textMap: map
+    })
   }
 
   getAttributes(item) {
@@ -109,14 +127,14 @@ export default class Page extends React.Component {
       opts = {
         class: item.attribs.class !== undefined ? item.attribs.class : "",
         id: item.attribs.id !== undefined ? item.attribs.id : "",
-        href: item.attribs.href !== undefined ? item.attribs.href : "#",
+        href: item.attribs.href !== undefined ? item.attribs.href : "#admin-panel-page-action",
         src: item.attribs.src !== undefined ? item.attribs.src : ""
       }
     } else {
       opts = {
         class: "",
         id: "",
-        href: "#",
+        href: "#admin-panel-page-action",
         src: ""
       }
     }
