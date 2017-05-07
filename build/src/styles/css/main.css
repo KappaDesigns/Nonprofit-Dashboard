@@ -1,6 +1,52 @@
 .admin-panel-editable-text {
   display: inline-block; }
   .admin-panel-editable-text:focus {
+    transition: all 0.1s ease-in-out;
+    border-bottom: 3px solid black;
     outline: none !important; }
+
+.admin-panel-image-panel {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 300px !important;
+  height: 250px !important;
+  background-color: #2a262f !important;
+  border-radius: 5px !important;
+  z-index: 5000 !important;
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75) !important;
+  -moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75) !important;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75) !important; }
+  .admin-panel-image-panel .admin-panel-header {
+    color: white !important;
+    text-align: center !important; }
+  .admin-panel-image-panel .admin-panel-image-input {
+    color: white !important;
+    width: 95% !important;
+    margin: 5px auto !important;
+    display: block !important;
+    background-color: #35303c !important;
+    border: 1px solid black !important; }
+    .admin-panel-image-panel .admin-panel-image-input:focus {
+      outline: none !important; }
+  .admin-panel-image-panel .admin-panel-image-preview {
+    margin: 0 auto !important;
+    width: 250px !important;
+    height: 125px !important;
+    display: block !important; }
+  .admin-panel-image-panel #admin-panel-ok-btn {
+    border-bottom-right-radius: 5px !important; }
+  .admin-panel-image-panel #admin-panel-cancel-btn {
+    border-bottom-left-radius: 5px !important; }
+  .admin-panel-image-panel .admin-panel-image-btn {
+    color: white !important;
+    background-color: #35303c !important;
+    width: 150px !important;
+    margin: 7px 0 !important;
+    border: none !important; }
+    .admin-panel-image-panel .admin-panel-image-btn:hover {
+      background-color: #423c4b !important; }
+    .admin-panel-image-panel .admin-panel-image-btn:focus {
+      outline: none !important; }
 
 /*# sourceMappingURL=main.css.map */

@@ -9,16 +9,19 @@ router.get('/*', (req, res, next) => {
       throw err;
     }
     if (id === null) {
-      return res.send("DOM does not exist").status(401);
+      return res.send("DOM does not exist").status(404);
     }
     DOM.getDOM(id, (err, dom) => {
       if (err) {
         throw err;
       }
-      console.log(dom);
       return res.send(dom);
     })
   })
+})
+
+router.post('/', (req, res, next) => {
+  DOM.setDOM(req.body);
 })
 
 function getPageID(req, next) {

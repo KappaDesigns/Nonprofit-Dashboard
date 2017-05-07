@@ -18,3 +18,11 @@ module.exports.getDOM = function (id, next) {
     return next(null, data);
   })
 };
+
+module.exports.setDOM = function (DOM, next) {
+  client.set(`page:${DOM.id}`, JSON.stringify(DOM), err => {
+    if (err) {
+      return next(err);
+    }
+  })
+}

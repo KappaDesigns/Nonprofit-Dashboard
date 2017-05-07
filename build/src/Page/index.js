@@ -6,25 +6,69 @@ export default class Page extends React.Component {
 
   constructor() {
     super();
-    this.nesting = 0;
-    this.textMap = {};
+    this.indexMap = new Map();
+    this.index = 0;
     this.state = {
-      textMap: this.textMap
+
     }
     this.renderDOM = this.renderDOM.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.fetchDOM = this.fetchDOM.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.saveData = this.saveData.bind(this);
   }
 
   componentWillMount() {
+    this.fetchDOM();
+    this.addCloseHandling();
+    this.createTemplate();
+  }
+
+  componentWillUnmount() {
+    this.removeCloseHandling()
+  }
+
+  createTemplate() {
+
+  }
+
+  addCloseHandling() {
+    let self = this;
+    $(window).on("beforeunload", function () {
+      self.saveData();
+    })
+    $(window).on("unload", function () {
+      self.saveData();
+    })
+  }
+
+  saveData() {
+    fetch("/api", {
+      method: "post",
+      body: JSON.stringify(this.state.dom),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+
+  removeCloseHandling() {
+    window.onbeforeunload = null;
+    window.onunload = null;
+  }
+
+  fetchDOM() {
     fetch(`/api/`).then((res) => {
       return res.json();
     })
     .then((json) => {
+      let htmlIndex = 0
       if (json.DOM[0].data.includes("!")) {
-        json.DOM.splice(0,1);
+        htmlIndex = 1
       }
-      let body = json.DOM[0].children[1];
-      let head = json.DOM[0].children[0];
+      let body = json.DOM[htmlIndex].children[1];
+      let head = json.DOM[htmlIndex].children[0];
       this.setState({
         head: head,
         body: body,
@@ -75,7 +119,6 @@ export default class Page extends React.Component {
   }
 
   render() {
-    this.nesting = 0;
     if (this.state.fetched) {
       return (
         <div>
@@ -87,38 +130,57 @@ export default class Page extends React.Component {
   }
 
   renderDOM(item) {
-    let index = this.nesting++;
+    this.index++;
+    let index = this.index;
     let opts = this.getAttributes(item);
-
+    let backgroundImage = {
+      backgroundImage: opts.backgroundImage
+    }
+    this.indexMap.set(index, item);
     if (!item.hasOwnProperty("children") && item.type == "tag") {
       let Tag = "" + item.name;
       return (
-        <Tag key={index} src={opts.src} id={opts.id} href={opts.href} class={opts.class}></Tag>
+        <Tag key={index} style={backgroundImage} src={opts.src} data-index={index} id={opts.id} href={opts.href} class={opts.class}></Tag>
       )
     } else if (item.hasOwnProperty("children")) {
       let Tag = "" + item.name;
       return (
-        <Tag key={index} id={opts.id} href={opts.href} src={opts.src} class={opts.class}>
+        <Tag style={backgroundImage} onClick={this.handleClick} data-index={index} key={index} id={opts.id} href={opts.href} src={opts.src} class={opts.class}>
           {
             item.children.map(this.renderDOM)
           }
         </Tag>
       )
     } else if (item.type == "text") {
-      this.textMap[index] = item
-      return (<span key={index} onKeyDown={this.handleChange} data-index={index} class="admin-panel-editable-text" contentEditable="true">{item.data}</span>);
+      return (
+        <span class="admin-panel-editable-text" data-index={index} key={index} contentEditable onInput={this.handleChange}>{item.data}</span>
+      );
     }
   }
 
   handleChange(e) {
-    console.log("bark");
-    let index = parseInt(e.target.dataset.index);
-    let map = this.state.textMap
-    map[index].data = e.target.textContent;
-    console.log(map[index].data);
-    this.setState({
-      textMap: map
-    })
+    let index = parseInt(e.target.dataset['index']);
+    let node = this.indexMap.get(index);
+    node.data = e.target.textContent
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.handleImageClick(e);
+  }
+
+  handleImageClick(e) {
+    let tag = e.target.tagName;
+    let $target = $(e.target);
+    let bgUrl = $target.css("background-image");
+    let url = tag == "IMG" ? e.target.src : bgUrl;
+    if (url !== "none") {
+      if (url.includes("url(")) {
+        url = url.substring(0, url.length - 2);
+        url = url.substring(5, url.length);
+      }
+      this.renderImageEdit(e, $target, url);
+    }
   }
 
   getAttributes(item) {
@@ -128,14 +190,16 @@ export default class Page extends React.Component {
         class: item.attribs.class !== undefined ? item.attribs.class : "",
         id: item.attribs.id !== undefined ? item.attribs.id : "",
         href: item.attribs.href !== undefined ? item.attribs.href : "#admin-panel-page-action",
-        src: item.attribs.src !== undefined ? item.attribs.src : ""
+        src: item.attribs.src !== undefined ? item.attribs.src : "",
+        backgroundImage: item.attribs.backgroundImage !== undefined ? item.attribs.backgroundImage : ""
       }
     } else {
       opts = {
         class: "",
         id: "",
         href: "#admin-panel-page-action",
-        src: ""
+        src: "",
+        backgroundImage: ""
       }
     }
     if (opts.src !== "") {
@@ -145,5 +209,62 @@ export default class Page extends React.Component {
       }
     }
     return opts;
+  }
+
+  renderImageEdit(e, ele, url) {
+    $('.admin-panel-image-panel').remove();
+    let template = '<div class="admin-panel-image-panel"><h3 class="admin-panel-header">Change Url</h3><input value='+url+' type="text" placeholder="Input Url Here..." class="admin-panel-image-input">' +
+    '<img src="' + url + '" alt="" class="admin-panel-image-preview"><button id="admin-panel-cancel-btn" class="admin-panel-image-btn">Cancel</button>' +
+    '<button id="admin-panel-ok-btn" class="admin-panel-image-btn">Ok</button></div>';
+
+    if (ele[0].nodeName == "IMG") {
+      ele.parent().append(template);
+    } else {
+      ele.append(template);
+    }
+
+    let index = parseInt(ele.data("index"));
+
+    let $child = $(ele).parent().find(".admin-panel-image-panel");
+    let width = $child.width();
+    let height = $child.height();
+    let top = e.pageY - height > 0 ? e.pageY - height : 0;
+    $child.offset({
+      left: e.pageX - (width / 2),
+      top: top
+    })
+
+    let input = document.getElementsByClassName('admin-panel-image-input')[0];
+    input.addEventListener("keyup", (e) => {
+      url = e.target.value;
+      $child.find(".admin-panel-image-preview").attr({
+        src: url
+      })
+    })
+
+    let okButton = $('#admin-panel-ok-btn');
+    let cancelButton = $('#admin-panel-cancel-btn');
+
+    okButton.click(() => {
+      let node = this.indexMap.get(index);
+      if (ele[0].nodeName === "IMG") {
+        ele.attr({
+          src: url
+        })
+        node.attribs.src = url;
+      } else {
+        ele.css({
+          "background-image": "url("+url+")"
+        })
+        node.attribs.backgroundImage = "url("+url+")";
+      }
+      this.saveData();
+      $child.remove();
+    })
+
+    cancelButton.click(() => {
+      console.log("nerrrrr");
+      $child.remove();
+    })
   }
 }

@@ -1,6 +1,8 @@
 .admin-panel-editable-text {
 	display: inline-block;
 	&:focus {
+		transition: all 0.1s ease-in-out;
+		border-bottom: 3px solid black;
 		outline: none !important;
 	}
 }
