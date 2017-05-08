@@ -35,14 +35,13 @@ router.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      return res.send({"login": "fail"});
+      return res.send({"login": "nice"});
     })
   })(req, res, next);
 })
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
 })
 
 module.exports = router;

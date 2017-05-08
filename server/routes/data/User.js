@@ -1,11 +1,17 @@
 const redis = require('redis');
 const client = redis.createClient();
+const crypto = require('crypto');
 
 module.exports.addUser = (body, next) => {
   client.incr('userID', (err, id) => {
     if (err) {
       return next(err);
     }
+    client.hmset(`usernamelist`, body.username, id, (err, data) => {
+      if (err) {
+        return next(err);
+      }
+    })
     client.hmset(`user:${id}`, body, (err, data) => {
       if (err) {
         return next(err);
@@ -20,24 +26,27 @@ module.exports.removeUser = (id, next) => {
 
 module.exports.findUser = (username, next) => {
   client.get('userID', (err, id) => {
-    if (err) {
-      return next(err);
-    }
-    id = parseInt(id);
-    for (let i = 0; i < id; i++) {
-      client.hgetall(`user:${i}`, (err, user) => {
+    client.hmget('usernamelist', username, (err, id) => {
+      if (err) {
+        return next(err);
+      }
+      if (!id) {
+        return next(null, false);
+      }
+      client.hgetall(`user:${id}`, (err, data) => {
         if (err) {
           return next(err);
         }
-        if (user && user.username == username) {
-          user.validPassword = (password) => {
-            return user.password == password;
-          }
-          return next(null, user);
+        if (!data) {
+          return next(null, false);
         }
+        data.validPassword = password => {
+          return password === data.password
+        }
+        data.id = id[0]
+        return next(null, data);
       })
-    }
-    return next(null, null);
+    })
   })
 }
 

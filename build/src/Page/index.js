@@ -1,6 +1,7 @@
 import React from "react";
 import "es6-map/implement";
 import "whatwg-fetch";
+import ActionButton from "./ActionButton";
 
 export default class Page extends React.Component {
 
@@ -45,6 +46,7 @@ export default class Page extends React.Component {
   saveData() {
     fetch("/api", {
       method: "post",
+      credentials:'same-origin',
       body: JSON.stringify(this.state.dom),
       headers: {
         'Accept': 'application/json',
@@ -59,10 +61,15 @@ export default class Page extends React.Component {
   }
 
   fetchDOM() {
-    fetch(`/api/`).then((res) => {
+    fetch(`/api/`, {
+      credentials:'same-origin'
+    }).then((res) => {
       return res.json();
     })
     .then((json) => {
+      if (json.hasOwnProperty("redirectToLogin")) {
+        window.location.href = "/login";
+      }
       let htmlIndex = 0
       if (json.DOM[0].data.includes("!")) {
         htmlIndex = 1
@@ -72,11 +79,13 @@ export default class Page extends React.Component {
       this.setState({
         head: head,
         body: body,
-        dom: json,
-        fetched: true
+        dom: json
       })
       this.getCSS(head);
       this.getScripts(json.DOM);
+      this.setState({
+        fetched: true
+      })
     })
   }
 
@@ -91,9 +100,6 @@ export default class Page extends React.Component {
           }
           let htmlString = `<script src=${src}></script>`;
           $('body').append(htmlString)
-        } else {
-          // handle script tag no src
-
         }
       }
       if (DOM[i].hasOwnProperty("children")) {
@@ -123,10 +129,21 @@ export default class Page extends React.Component {
       return (
         <div>
           {this.state.body.children.map(this.renderDOM)}
+          <ActionButton></ActionButton>
         </div>
       )
     }
-    return (<div></div>)
+    return (
+      <div className="admin-panel-loading">
+        <h1 className="admin-panel-loading-text">Loading</h1>
+          <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+          </div>
+      </div>
+    )
   }
 
   renderDOM(item) {

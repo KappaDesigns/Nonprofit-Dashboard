@@ -19,18 +19,16 @@ app.use(cookieParser('keyboard cat'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
-	secret: 'keyboard dong',
+	secret: 'keyboard cat',
 	resave: false,
 	saveUninitialized: true,
-	cookie: {
-		secure: true
-	}
 }))
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, next) => {
-	next(null, user);
+	console.log(user);
+	next(null, user.id);
 })
 
 passport.deserializeUser((id, next) => {

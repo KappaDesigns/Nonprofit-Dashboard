@@ -1,0 +1,52 @@
+.action-button {
+  z-index: 1000000;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(37, 138, 176);
+  border-radius: 100%;
+  -webkit-box-shadow: 0px 0px 17px 9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 17px 9px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 17px 9px rgba(0,0,0,0.75);
+  div {
+    cursor: pointer;
+    margin-top: -10px;
+    text-align: center;
+    font-size: 72px;
+    color: white;
+    transition: all 0.5s ease;
+    text-shadow: 1px 1px rgb(47, 47, 47), 2px 2px rgb(47, 47, 47) , 3px 3px rgb(47, 47, 47), 4px 4px rgb(47, 47, 47), 5px 5px rgb(47, 47, 47),
+                 6px 6px rgb(47, 47, 47), 7px 7px rgb(47, 47, 47), 8px 8px rgb(47, 47, 47), 9px 9px rgb(47, 47, 47), 10px 10px rgb(47, 47, 47),
+                 11px 11px rgb(47, 47, 47), 12px 12px rgb(47, 47, 47), 13px 13px rgb(47, 47, 47), 14px 14px rgb(47, 47, 47), 15px 15px rgb(47, 47, 47),
+                 16px 16px rgb(47, 47, 47), 17px 17px rgb(47, 47, 47), 18px 18px rgb(47, 47, 47), 19px 19px rgb(47, 47, 47), 20px 20px rgb(47, 47, 47), 21px 21px rgb(47, 47, 47),
+                 22px 22px rgb(47, 47, 47), 23px 23px rgb(47, 47, 47), 24px 24px rgb(47, 47, 47), 25px 25px rgb(47, 47, 47);
+     &:hover {
+       text-shadow: none;
+     }
+  }
+  #action-list {
+    display: none;
+    position: fixed;
+    bottom: 160px;
+    right: 80px;
+    .action {
+      &:hover {
+        cursor: pointer;
+      }
+      padding-top: 15px;
+      -webkit-box-shadow: 0px 0px 17px 9px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 17px 9px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 17px 9px rgba(0,0,0,0.75);
+      text-align: center;
+      margin: 20px 0;
+      display: block;
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 100%;
+    }
+    // display: none;
+  }
+}
