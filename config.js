@@ -23,6 +23,7 @@ module.exports = {
 };
 
 function setInit() {
+	client.del("DomMap");
 	client.set("initialized", true, err => {
 		if (err) {
 			throw err;

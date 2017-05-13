@@ -26,3 +26,12 @@ module.exports.setDOM = function (DOM, next) {
     }
   })
 }
+
+module.exports.getPages = function (next) {
+  client.hgetall(`DomMap`, (err, data) => {
+    if (err) {
+      return next(err);
+    }
+    next(null, data);
+  })
+}

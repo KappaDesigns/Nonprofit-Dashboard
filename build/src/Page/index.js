@@ -1,7 +1,6 @@
 import React from "react";
 import "es6-map/implement";
 import "whatwg-fetch";
-import ActionButton from "./ActionButton";
 
 export default class Page extends React.Component {
 
@@ -19,8 +18,9 @@ export default class Page extends React.Component {
   }
 
   componentWillMount() {
+    let id = this.props.params.id !== undefined ? this.props.params.id : "";
     this.setState({
-      page: ""
+      page: id
     })
     this.isAuthenticated(this.handleSockets);
   }
@@ -70,12 +70,23 @@ export default class Page extends React.Component {
 
     this.socket.on('setDOM', (data) => {
       let json = data.dom;
-      let htmlIndex = 0
-      if (json.DOM[0].data.includes("!")) {
-        htmlIndex = 1
+      let htmlIndex = 0;
+      let head;
+      this.indexPath = data.index;
+      for (let i = 0; i < json.DOM.length; i++) {
+        if (json.DOM[i].type == "tag" && json.DOM[i].name == "html") {
+          htmlIndex = i;
+        }
       }
-      let body = json.DOM[htmlIndex].children[1];
-      let head = json.DOM[htmlIndex].children[0];
+      for (let i = 0; i < json.DOM[htmlIndex].children.length; i++) {
+        if (json.DOM[htmlIndex].children[i].name == "head") {
+          head = json.DOM[htmlIndex].children[i];
+        }
+      }
+      let nodes = [];
+      this.findBody(json.DOM, nodes);
+      let body = nodes[0];
+      console.log(body,head);
       this.setState({
         head: head,
         body: body,
@@ -89,14 +100,26 @@ export default class Page extends React.Component {
     })
   }
 
+  findBody(nodes, a) {
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].name == "body") {
+        a.push(nodes[i]);
+      }
+      if (nodes[i].hasOwnProperty("children")) {
+        this.findBody(nodes[i].children, a);
+      }
+    }
+  }
+
   getScripts(DOM) {
     for (let i = 0; i < DOM.length; i++) {
       if (DOM[i].name == "script") {
         if (DOM[i].attribs.hasOwnProperty("src")) {
           let src = DOM[i].attribs.src;
+          console.log(src);
           if (!src.includes("http")) {
             src = src.replace(this.state.dom.path);
-            src = "http://" + this.state.dom.path + "/" + src;
+            src = "http://" + this.indexPath + "/" + src;
           }
           let htmlString = `<script src=${src}></script>`;
           $('body').append(htmlString)
@@ -116,7 +139,7 @@ export default class Page extends React.Component {
         let rel = link.attribs.rel;
         if (!href.includes("http")) {
           href = href.replace(this.state.dom.path);
-          href = "http://" + this.state.dom.path + "/" + href;
+          href = "http://" + this.indexPath + "/" + href;
         }
         let htmlString = `<${link.name} href=${href} rel=${rel}></${link.name}>`;
         $('head').append(htmlString);

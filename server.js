@@ -65,10 +65,21 @@ io.on('connection', function (socket) {
 	})
 
 	socket.on('getDOM', data => {
-		let val = domMap.get(config.index + data.page);
-		console.log(val);
+		let val = domMap.get(config.index);
+		if (data.page.length !== 0) {
+			let it = domMap.values();
+			let node = it.next();
+			while(!node.done) {
+				if (node.value.id == data.page) {
+					console.log(node.value.path);
+					val = domMap.get(node.value.path)
+				}
+				node = it.next();
+			}
+		}
 		socket.emit('setDOM', {
-			dom: val
+			dom: val,
+			index: config.index
 		})
 	})
 

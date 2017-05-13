@@ -32,6 +32,19 @@ router.post('/', (req, res, next) => {
   }
 })
 
+router.get('/pages', (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.send({"message": "forbidden", "redirectToLogin": true}).status(403);
+  } else {
+    DOM.getPages((err, data) => {
+      if (err) {
+        throw err;
+      }
+      return res.send(data);
+    })
+  }
+})
+
 function getPageID(req, next) {
   let path = `${config.index}`
   if (req.originalUrl !== "/api/") {
