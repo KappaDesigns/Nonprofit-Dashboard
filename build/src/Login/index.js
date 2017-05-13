@@ -7,7 +7,7 @@ export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      subredditOptions: ["Earth", "Village"],
+      subredditOptions: ["Earth"],
       imageUrls: [],
       username: "",
       password: ""
@@ -31,6 +31,18 @@ export default class Login extends React.Component {
         url: self.state.imageUrls[index]
       })
     });
+    fetch(`/api/authenticated`, {
+      method: "post",
+      credentials: "same-origin"
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      if (json.isAuthenticated) {
+        window.location.href = "/";
+      }
+    })
   }
 
   render() {

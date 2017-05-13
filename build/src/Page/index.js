@@ -7,69 +7,69 @@ export default class Page extends React.Component {
 
   constructor() {
     super();
-    this.indexMap = new Map();
+    this.indexMap = {};
     this.index = 0;
     this.state = {
 
     }
     this.renderDOM = this.renderDOM.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.fetchDOM = this.fetchDOM.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.saveData = this.saveData.bind(this);
+    this.handleSockets = this.handleSockets.bind(this);
   }
 
   componentWillMount() {
-    this.fetchDOM();
-    this.addCloseHandling();
-    this.createTemplate();
-  }
-
-  componentWillUnmount() {
-    this.removeCloseHandling()
-  }
-
-  createTemplate() {
-
-  }
-
-  addCloseHandling() {
-    let self = this;
-    $(window).on("beforeunload", function () {
-      self.saveData();
+    this.setState({
+      page: ""
     })
-    $(window).on("unload", function () {
-      self.saveData();
-    })
+    this.isAuthenticated(this.handleSockets);
   }
 
-  saveData() {
-    fetch("/api", {
+  isAuthenticated(next) {
+    fetch(`/api/authenticated`, {
       method: "post",
-      credentials:'same-origin',
-      body: JSON.stringify(this.state.dom),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      credentials: "same-origin"
     })
-  }
-
-  removeCloseHandling() {
-    window.onbeforeunload = null;
-    window.onunload = null;
-  }
-
-  fetchDOM() {
-    fetch(`/api/`, {
-      credentials:'same-origin'
-    }).then((res) => {
+    .then((res) => {
       return res.json();
     })
     .then((json) => {
-      if (json.hasOwnProperty("redirectToLogin")) {
+      if (json.isAuthenticated) {
+        return next();
+      } else {
         window.location.href = "/login";
+        return;
       }
+    })
+  }
+
+  handleSockets() {
+    this.socket = io.connect('http://localhost:3000');
+
+    this.socket.emit('getID', {});
+
+    this.socket.emit('getDOM', {
+      page: this.state.page,
+    })
+
+    this.socket.on('sendID', (data) => {
+      this.id = data.id;
+    })
+
+    this.socket.on('updateDOM', (data) => {
+      if (data.senderID != this.id) {
+        let newState = data;
+        this.indexMap = newState.indexMap
+        this.setState({
+          body: newState.body,
+          head: newState.head,
+          dom: newState.dom,
+        })
+      }
+    })
+
+    this.socket.on('setDOM', (data) => {
+      let json = data.dom;
       let htmlIndex = 0
       if (json.DOM[0].data.includes("!")) {
         htmlIndex = 1
@@ -125,11 +125,11 @@ export default class Page extends React.Component {
   }
 
   render() {
+    this.index = 0;
     if (this.state.fetched) {
       return (
         <div>
           {this.state.body.children.map(this.renderDOM)}
-          <ActionButton></ActionButton>
         </div>
       )
     }
@@ -153,7 +153,7 @@ export default class Page extends React.Component {
     let backgroundImage = {
       backgroundImage: opts.backgroundImage
     }
-    this.indexMap.set(index, item);
+    this.indexMap[index] = item
     if (!item.hasOwnProperty("children") && item.type == "tag") {
       let Tag = "" + item.name;
       return (
@@ -177,8 +177,12 @@ export default class Page extends React.Component {
 
   handleChange(e) {
     let index = parseInt(e.target.dataset['index']);
-    let node = this.indexMap.get(index);
-    node.data = e.target.textContent
+    let node = this.indexMap[index];
+    node.data = e.target.textContent;
+    let data = this.state;
+    data.indexMap = this.indexMap;
+    data.senderID = this.id;
+    this.socket.emit('updateDOM', data);
   }
 
   handleClick(e) {
@@ -200,6 +204,7 @@ export default class Page extends React.Component {
     }
   }
 
+// TODO: Change to return a string with all attribs mapped out
   getAttributes(item) {
     let opts = {}
     if (item.hasOwnProperty("attribs")) {
@@ -228,6 +233,7 @@ export default class Page extends React.Component {
     return opts;
   }
 
+// TODO: Break down into smaller functions
   renderImageEdit(e, ele, url) {
     $('.admin-panel-image-panel').remove();
     let template = '<div class="admin-panel-image-panel"><h3 class="admin-panel-header">Change Url</h3><input value='+url+' type="text" placeholder="Input Url Here..." class="admin-panel-image-input">' +
@@ -263,7 +269,7 @@ export default class Page extends React.Component {
     let cancelButton = $('#admin-panel-cancel-btn');
 
     okButton.click(() => {
-      let node = this.indexMap.get(index);
+      let node = this.indexMap[index];
       if (ele[0].nodeName === "IMG") {
         ele.attr({
           src: url
@@ -275,12 +281,14 @@ export default class Page extends React.Component {
         })
         node.attribs.backgroundImage = "url("+url+")";
       }
-      this.saveData();
+      let data = this.state;
+      data.indexMap = this.indexMap;
+      data.senderID = this.id;
+      this.socket.emit('updateDOM', data);
       $child.remove();
     })
 
     cancelButton.click(() => {
-      console.log("nerrrrr");
       $child.remove();
     })
   }

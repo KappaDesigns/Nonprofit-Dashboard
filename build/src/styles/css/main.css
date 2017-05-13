@@ -113,6 +113,12 @@ body, html {
           outline: none;
           background-color: #07ba44; }
 
+.admin-panel-logging-out {
+  margin-top: 12%;
+  text-align: center;
+  font-family: 'Robot', sans-serif;
+  margin-bottom: 50px; }
+
 .admin-panel-loading {
   font-family: 'Robot', sans-serif;
   width: 100%;
@@ -227,11 +233,14 @@ body, html {
     .action-button div:hover {
       text-shadow: none; }
   .action-button #action-list {
+    text-transform: capitalize;
     display: none;
     position: fixed;
-    bottom: 160px;
-    right: 80px; }
+    bottom: 150px;
+    right: 75px; }
     .action-button #action-list .action {
+      transition: all 0.5s ease-in-out;
+      color: white;
       padding-top: 15px;
       -webkit-box-shadow: 0px 0px 17px 9px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 0px 0px 17px 9px rgba(0, 0, 0, 0.75);
@@ -244,6 +253,15 @@ body, html {
       background-color: white;
       border-radius: 100%; }
       .action-button #action-list .action:hover {
-        cursor: pointer; }
+        text-decoration: none;
+        cursor: pointer;
+        color: black; }
+      .action-button #action-list .action i {
+        margin-left: 5px;
+        margin-top: -4px; }
+      .action-button #action-list .action .tooltip {
+        background-color: white;
+        color: white;
+        font-size: 36px; }
 
 /*# sourceMappingURL=main.css.map */

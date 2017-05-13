@@ -29,19 +29,32 @@ router.post('/login', (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.send({"message":"user fail"});
+      return res.send({"login": false});
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      return res.send({"login": "nice"});
+      return res.send({"login": true});
     })
   })(req, res, next);
 })
 
-router.get('/logout', (req, res) => {
+router.post('/authenticated', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return res.send({
+      isAuthenticated: true
+    })
+  } else {
+    return res.send({
+      isAuthenticated: false
+    })
+  }
+})
+
+router.post('/logout', (req, res) => {
   req.logout();
+  return res.send({"success": true}).status(201);
 })
 
 module.exports = router;
