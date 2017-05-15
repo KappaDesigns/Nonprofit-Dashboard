@@ -259,6 +259,8 @@ body, html {
       .action-button #action-list .action-wrapper .action i {
         margin-left: 5px;
         margin-top: -4px; }
+      .action-button #action-list .action-wrapper .action #profile {
+        margin-left: 1px; }
     .action-button #action-list .action-wrapper .admin-tooltip {
       display: none;
       border: 1px solid #adadad;
@@ -303,5 +305,49 @@ body, html {
     .sitemap-container .sitemap-list .sitemap-link:hover {
       background-position: 0 -100%;
       color: black; }
+
+.user-edit-container {
+  font-family: "Roboto", sans-serif; }
+  .user-edit-container .edit-user {
+    text-align: center;
+    padding: 25px 0;
+    border-bottom: 1px solid black; }
+  .user-edit-container .user-edit {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center; }
+    .user-edit-container .user-edit .user-label, .user-edit-container .user-edit .password-label, .user-edit-container .user-edit .email-label {
+      text-align: left;
+      margin-top: 25px;
+      display: inline-block;
+      width: 100px;
+      font-size: 14px; }
+    .user-edit-container .user-edit .username-field, .user-edit-container .user-edit .password-field, .user-edit-container .user-edit .email-field {
+      width: 200px;
+      padding: 3px 5px;
+      font-size: 14px;
+      border: none;
+      border-bottom: 1px solid black; }
+      .user-edit-container .user-edit .username-field:focus, .user-edit-container .user-edit .password-field:focus, .user-edit-container .user-edit .email-field:focus {
+        outline: none; }
+    .user-edit-container .user-edit .submit-container {
+      margin: 0 auto;
+      text-align: center; }
+      .user-edit-container .user-edit .submit-container .submit {
+        font-size: 16px;
+        padding: 10px 15px;
+        margin: 45px auto;
+        display: block;
+        width: 125px;
+        border-radius: none;
+        border: none;
+        color: white;
+        background-color: #30a741;
+        transition: all 0.2s ease-in-out;
+        border-bottom: 4px solid #20742c; }
+        .user-edit-container .user-edit .submit-container .submit:hover {
+          background-color: #1f7c2c;
+          cursor: pointer;
+          border-bottom: none; }
 
 /*# sourceMappingURL=main.css.map */

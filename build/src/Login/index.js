@@ -1,13 +1,13 @@
 import React from "react";
 import "whatwg-fetch";
 import crypto from "crypto";
-import { secret } from "./secret";
+import { secret, subreddits } from "../../../fConfig";
 
 export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      subredditOptions: ["Earth"],
+      subredditOptions: subreddits,
       imageUrls: [],
       username: "",
       password: ""

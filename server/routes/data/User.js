@@ -20,6 +20,19 @@ module.exports.addUser = (body, next) => {
   })
 }
 
+module.exports.updateUser = (username, data, next) => {
+  module.exports.findUser(username, (err, user) => {
+    client.hdel(`usernamelist`, user.username, (err) => {
+      if (err) {
+        return next(err);
+      }
+      client.hmset(`usernamelist`, data.username, user.id);
+      client.hmset(`user:${user.id}`, data);
+      return next(null);
+    })
+  })
+}
+
 module.exports.removeUser = (id, next) => {
   client.del(`user:${id}`)
 }

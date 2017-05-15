@@ -1,0 +1,52 @@
+.user-edit-container {
+  font-family: "Roboto", sans-serif;;
+  .edit-user {
+    text-align: center;
+    padding: 25px 0;
+    border-bottom: 1px solid black;
+  }
+  .user-edit {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    .user-label, .password-label, .email-label {
+      text-align: left;
+      margin-top: 25px;
+      display: inline-block;
+      width: 100px;
+      font-size: 14px;
+    }
+    .username-field, .password-field, .email-field {
+      width: 200px;
+      padding: 3px 5px;
+      font-size: 14px;
+      border: none;
+      border-bottom: 1px solid black;
+      &:focus {
+        outline: none;
+      }
+    }
+    .submit-container {
+      margin: 0 auto;
+      text-align: center;
+      .submit {
+        font-size: 16px;
+        padding: 10px 15px;
+        margin: 45px auto;
+        display: block;
+        width: 125px;
+        border-radius: none;
+        border: none;
+        color:white;
+        background-color: rgb(48, 167, 65);
+        transition: all 0.2s ease-in-out;
+        border-bottom: 4px solid rgb(32, 116, 44);
+        &:hover {
+          background-color: rgb(31, 124, 44);
+          cursor: pointer;
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

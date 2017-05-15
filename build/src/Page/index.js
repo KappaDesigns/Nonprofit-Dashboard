@@ -86,7 +86,6 @@ export default class Page extends React.Component {
       let nodes = [];
       this.findBody(json.DOM, nodes);
       let body = nodes[0];
-      console.log(body,head);
       this.setState({
         head: head,
         body: body,
@@ -116,7 +115,6 @@ export default class Page extends React.Component {
       if (DOM[i].name == "script") {
         if (DOM[i].attribs.hasOwnProperty("src")) {
           let src = DOM[i].attribs.src;
-          console.log(src);
           if (!src.includes("http")) {
             src = src.replace(this.state.dom.path);
             src = "http://" + this.indexPath + "/" + src;
@@ -149,6 +147,7 @@ export default class Page extends React.Component {
 
   render() {
     this.index = 0;
+    console.log(this.state);
     if (this.state.fetched) {
       return (
         <div>

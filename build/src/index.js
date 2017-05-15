@@ -15,7 +15,7 @@ class App extends React.Component {
         <Route component={Layout}>
           <Route path="/" component={Page}></Route>
           <Route path="/page/:id" component={Page}></Route>
-          <Route path="/user/:id" component={User}></Route>
+          <Route path="/user" component={User}></Route>
           <Route path="/pages" component={Pages}></Route>
         </Route>
         <Route path="/login" component={Login}></Route>

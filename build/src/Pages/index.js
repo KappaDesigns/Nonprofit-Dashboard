@@ -48,7 +48,6 @@ export default class Pages extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
 		if (this.state.fetched) {
 			return (
 				<div className="sitemap-container">
@@ -78,14 +77,14 @@ export default class Pages extends React.Component {
 	renderSiteMap(item, i) {
 		let color = '#' + ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6);
 		let style = {
-			"background-image": `linear-gradient(to bottom, white 50%, ${color} 50%)`,
+			"backgroundImage": `linear-gradient(to bottom, white 50%, ${color} 50%)`,
 		}
 		while (item.path.includes("_")) {
 			item.path = item.path.replace("_", "/");
 		}
 		return (
-			<div>
-				<Link style={style} className="sitemap-link" to={`page/${item.id}`} key={i}>{item.path}</Link>
+			<div key={i}>
+				<Link key={`link-${i}`} style={style} className="sitemap-link" to={`page/${item.id}`} key={i}>{item.path}</Link>
 			</div>
 		)
 	}

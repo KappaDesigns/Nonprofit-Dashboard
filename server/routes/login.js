@@ -52,6 +52,29 @@ router.post('/authenticated', (req, res, next) => {
   }
 })
 
+router.put('/user/:username', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    User.updateUser(req.params.username, req.body, () => {
+      return res.send({})
+    })
+  } else {
+    return res.send({
+      error: "error"
+    })
+  }
+})
+
+router.get('/user', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return res.send({
+      user: req.user
+    })
+  }
+  return res.send({
+    user: {}
+  })
+})
+
 router.post('/logout', (req, res) => {
   req.logout();
   return res.send({"success": true}).status(201);

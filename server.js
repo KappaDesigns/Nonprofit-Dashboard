@@ -71,7 +71,6 @@ io.on('connection', function (socket) {
 			let node = it.next();
 			while(!node.done) {
 				if (node.value.id == data.page) {
-					console.log(node.value.path);
 					val = domMap.get(node.value.path)
 				}
 				node = it.next();
@@ -89,10 +88,12 @@ io.on('connection', function (socket) {
   })
 
 	socket.on('disconnect', () => {
-		let keys = domMap.keys();
-		for (let i = 0; i < keys.length; i++) {
-			let dom = domMap.get(keys[i]);
+		let it = domMap.keys();
+		let node = it.next();
+		while (!node.done) {
+			let dom = domMap.get(node.value);
 			saveDOM(dom.id, dom);
+			node = it.next();
 		}
 	})
 })
