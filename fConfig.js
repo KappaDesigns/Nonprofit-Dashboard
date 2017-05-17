@@ -19,4 +19,5 @@ export const actions = [
     icon: "fa fa-sign-out fa-2x"
   }
 ];
-export const subreddits = ["Earth"]
+export const subreddits = ["Earth"];
+export const siteID = "NXzJs6fstZ";
