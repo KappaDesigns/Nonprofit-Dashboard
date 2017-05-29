@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session =  require('express-session');
 const passport = require('passport');
+const favicon = require('serve-favicon')
 const server = http.createServer(app);
 const io = require("socket.io")(server);
 
@@ -25,6 +26,7 @@ const login = require('./server/routes/login');
 
 const User = require('./server/routes/data/User')
 
+app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')))
 app.use(logger('dev'));
 app.use(cookieParser('keyboard cat'));
 app.use(bodyParser.json());
