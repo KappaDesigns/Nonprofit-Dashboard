@@ -35,6 +35,8 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true,
 }))
+app.use(Express.static(path.join(__dirname, 'build')));
+app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')))
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -47,8 +49,6 @@ passport.deserializeUser((id, next) => {
 		next(err, user);
 	})
 })
-
-app.use(Express.static(path.join(__dirname, 'build')));
 
 app.use('/api', page);
 app.use('/api', login)
