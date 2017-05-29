@@ -101,7 +101,7 @@ io.on('connection', function (socket) {
 
 // End Websocket
 
-server.listen(config.port, () => {
+server.listen(process.env.PORT || config.port, () => {
 	console.log(`App listening on port:${config.port}`);
 	config.handleInit();
 })
