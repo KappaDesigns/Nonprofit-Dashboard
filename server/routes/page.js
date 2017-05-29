@@ -24,6 +24,24 @@ router.get('/', (req, res, next) => {
   }
 })
 
+router.get('/html/:site', (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  DOM.getDomID(req.params.site, (err, id) => {
+    if (err) {
+      return next(err);
+    }
+    if (id === null) {
+      return res.send({"message":"DOM does not exist"}).status(404);
+    }
+    DOM.getDOM(id, (err, dom) => {
+      if (err) {
+        throw err;
+      }
+      return res.send(dom);
+    })
+  })
+})
+
 router.post('/', (req, res, next) => {
   if (!req.isAuthenticated()) {
     return res.send({"message": "forbidden", "redirectToLogin": true}).status(403);
