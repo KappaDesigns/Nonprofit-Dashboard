@@ -26,7 +26,6 @@ const login = require('./server/routes/login');
 
 const User = require('./server/routes/data/User')
 
-app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')))
 app.use(logger('dev'));
 app.use(cookieParser('keyboard cat'));
 app.use(bodyParser.json());
