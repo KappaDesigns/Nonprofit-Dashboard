@@ -1,6 +1,14 @@
 const redis = require('redis');
-const client = redis.createClient();
+const client;
 const crypto = require('crypto');
+
+if (process.env.REDISTOGO_URL) {
+	var rtg = require("url").parse(process.env.REDISTOGO_URL);
+	var redis = require("redis").createClient(rtg.port, rtg.hostname);
+	redis.auth(rtg.auth.split(":")[1]);
+} else {
+  client = require("redis").createClient();
+}
 
 module.exports.addUser = (body, next) => {
   client.incr('userID', (err, id) => {
