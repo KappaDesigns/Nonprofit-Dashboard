@@ -13,8 +13,7 @@ const server = http.createServer(app);
 const io = require("socket.io")(server);
 
 //redis
-const redis;
-const client;
+let client;
 
 //Websocket Consts
 const domMap = new Map();
@@ -28,7 +27,7 @@ const User = require('./server/routes/data/User');
 
 if (process.env.REDISTOGO_URL) {
 	var rtg = require("url").parse(process.env.REDISTOGO_URL);
-	var redis = require("redis").createClient(rtg.port, rtg.hostname);
+	client = require("redis").createClient(rtg.port, rtg.hostname);
 	redis.auth(rtg.auth.split(":")[1]);
 } else {
   client = require("redis").createClient();
