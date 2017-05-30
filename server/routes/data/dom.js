@@ -1,5 +1,5 @@
-const redis = require("redis");
-const client = redis.createClient();
+const redis = require("../../../redis");
+const client = redis.client;
 
 module.exports.getDomID = function (url, next) {
   client.hmget(`DomMap`, url, (err , data) => {

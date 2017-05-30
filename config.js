@@ -1,10 +1,10 @@
-const redis = require('redis');
 const MockDOM = require('./MockDOM');
 const Crawler = require('./LinkCrawler');
 
 const index = "kappadesigns.org";
 
-const client = redis.createClient();
+const redis = require("./redis");
+const client = redis.client;
 const crawler = new Crawler(index);
 
 module.exports = {
@@ -16,6 +16,7 @@ module.exports = {
 				throw err;
 			}
 			if (!key) {
+				console.log("initializing ["+index+"]....");
 				setInit();
 			}
 		})
@@ -33,5 +34,6 @@ function setInit() {
 }
 
 function setupSite() {
+	console.log("Crawling through ["+index+"]...");
 	crawler.crawl();
 }

@@ -1,6 +1,6 @@
 const HtmlParser = require('htmlparser');
-const redis = require("redis");
-const client = redis.createClient();
+const redis = require("./redis");
+const client = redis.client;
 
 class MockDOM {
 	constructor(html, path, next) {

@@ -1,5 +1,5 @@
-const redis = require('redis');
-const client = redis.createClient();
+const redis = require("../../../redis");
+const client = redis.client;
 const crypto = require('crypto');
 
 module.exports.addUser = (body, next) => {

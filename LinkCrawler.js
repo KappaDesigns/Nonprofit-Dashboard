@@ -1,9 +1,8 @@
-const redis = require('redis');
-
 const http = require('http');
 const fs = require('fs');
-const client = redis.createClient();
 const MockDOM = require('./MockDOM');
+const redis = require("./redis");
+const client = redis.client;
 
 class LinkCrawler {
 	constructor(baseURL) {
@@ -16,6 +15,7 @@ class LinkCrawler {
 	}
 
 	downloadSite(page) {
+		console.log("on page: "+ page + "...");
 		this.recursed.add(page);
 		let url = `http://${page}`;
 		while(page.includes("/")) {
@@ -67,6 +67,7 @@ class LinkCrawler {
 				throw err;
 			}
 		})
+		console.log("Saving " + DOM.path + "...");
 	}
 
 	getStartTag(DOM) {

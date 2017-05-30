@@ -8,12 +8,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session =  require('express-session');
 const passport = require('passport');
+const favicon = require('serve-favicon')
 const server = http.createServer(app);
 const io = require("socket.io")(server);
 
 //redis
-const redis = require('redis');
-const client = redis.createClient();
+const redis = require("./redis");
+const client = redis.client;
 
 //Websocket Consts
 const domMap = new Map();
@@ -23,7 +24,7 @@ initializeDomMap();
 const page = require('./server/routes/page');
 const login = require('./server/routes/login');
 
-const User = require('./server/routes/data/User')
+const User = require('./server/routes/data/User');
 
 app.use(logger('dev'));
 app.use(cookieParser('keyboard cat'));
@@ -34,6 +35,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true,
 }))
+app.use(Express.static(path.join(__dirname, 'build')));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -46,8 +48,6 @@ passport.deserializeUser((id, next) => {
 		next(err, user);
 	})
 })
-
-app.use(Express.static(path.join(__dirname, 'build')));
 
 app.use('/api', page);
 app.use('/api', login)
@@ -84,6 +84,7 @@ io.on('connection', function (socket) {
 
   socket.on('updateDOM', data => {
 		domMap.set(data.dom.path, data.dom);
+		saveDOM(data.dom.id, data.dom);
 		io.emit('updateDOM', data);
   })
 
@@ -100,20 +101,22 @@ io.on('connection', function (socket) {
 
 // End Websocket
 
-server.listen(config.port, () => {
+server.listen(process.env.PORT || config.port, () => {
 	console.log(`App listening on port:${config.port}`);
 	config.handleInit();
 })
 
 function initializeDomMap() {
 	client.hgetall(`DomMap`, (err, data) => {
-		let keys = Object.keys(data);
-		for (let i = 0; i < keys.length; i++) {
-			let id = data[keys[i]]
-			client.get(`page:${id}`, (err, data) => {
+		if (data) {
+			let keys = Object.keys(data);
+			for (let i = 0; i < keys.length; i++) {
+				let id = data[keys[i]]
+				client.get(`page:${id}`, (err, data) => {
 
-				domMap.set(keys[i], JSON.parse(data));
-			})
+					domMap.set(keys[i], JSON.parse(data));
+				})
+			}
 		}
 	})
 }
