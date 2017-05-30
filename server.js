@@ -14,6 +14,7 @@ const io = require("socket.io")(server);
 
 //redis
 let client = require("redis").createClient("redis://redistogo:8b2186cfc25a6e2e59d0cf6af0daf7b9@greeneye.redistogo.com:10702/");
+console.log(client);
 
 //Websocket Consts
 const domMap = new Map();
@@ -107,13 +108,15 @@ server.listen(process.env.PORT || config.port, () => {
 
 function initializeDomMap() {
 	client.hgetall(`DomMap`, (err, data) => {
-		let keys = Object.keys(data);
-		for (let i = 0; i < keys.length; i++) {
-			let id = data[keys[i]]
-			client.get(`page:${id}`, (err, data) => {
+		if (data) {
+			let keys = Object.keys(data);
+			for (let i = 0; i < keys.length; i++) {
+				let id = data[keys[i]]
+				client.get(`page:${id}`, (err, data) => {
 
-				domMap.set(keys[i], JSON.parse(data));
-			})
+					domMap.set(keys[i], JSON.parse(data));
+				})
+			}
 		}
 	})
 }
