@@ -36,7 +36,6 @@ app.use(session({
 	saveUninitialized: true,
 }))
 app.use(Express.static(path.join(__dirname, 'build')));
-app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')))
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -85,6 +84,7 @@ io.on('connection', function (socket) {
 
   socket.on('updateDOM', data => {
 		domMap.set(data.dom.path, data.dom);
+		saveDOM(data.dom.id, data.dom);
 		io.emit('updateDOM', data);
   })
 
