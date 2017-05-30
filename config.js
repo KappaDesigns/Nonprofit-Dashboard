@@ -3,7 +3,8 @@ const Crawler = require('./LinkCrawler');
 
 const index = "kappadesigns.org";
 
-let client = require("redis").createClient("redis://redistogo:8b2186cfc25a6e2e59d0cf6af0daf7b9@greeneye.redistogo.com:10702/");
+const redis = require("./redis");
+const client = redis.client;
 const crawler = new Crawler(index);
 
 module.exports = {
