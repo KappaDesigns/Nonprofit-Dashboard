@@ -13,6 +13,12 @@ export const actions = [
     icon: "fa fa-user fa-2x"
   },
   {
+    tooltip: "Register",
+    path: `/register`,
+    color: "rgb(205, 122, 187)",
+    icon: "fa fa-user fa-2x"
+  },
+  {
     tooltip: "Logout",
     path: "/logout",
     color: "rgb(37, 182, 201)",
@@ -20,4 +26,3 @@ export const actions = [
   }
 ];
 export const subreddits = ["Earth"];
-export const siteID = "NXzJs6fstZ";

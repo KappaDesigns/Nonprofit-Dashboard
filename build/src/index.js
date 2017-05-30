@@ -7,6 +7,7 @@ import Logout from "./Logout/";
 import Pages from "./Pages";
 import Layout from "./Layout";
 import User from "./User";
+import Register from "./Register";
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class App extends React.Component {
           <Route path="/page/:id" component={Page}></Route>
           <Route path="/user" component={User}></Route>
           <Route path="/pages" component={Pages}></Route>
+          <Route path="/register" component={Register}></Route>
         </Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/logout" component={Logout}></Route>

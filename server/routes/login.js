@@ -75,6 +75,40 @@ router.get('/user', (req, res, next) => {
   })
 })
 
+router.get('/exists/:username', (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.send({
+      message: "forbidden"
+    }).status(403);
+  } else {
+    User.findUser(req.params.username, (err, user) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.send({
+          exists: false
+        })
+      } else {
+        return res.send({
+          exists: true
+        })
+      }
+    })
+  }
+})
+
+router.post('/user', (req, res, next) => {
+  User.addUser(req.body, (err) => {
+    if (err) {
+      return next(err);
+    }
+    return res.send({
+      message: "user created"
+    });
+  })
+})
+
 router.post('/logout', (req, res) => {
   req.logout();
   return res.send({"success": true}).status(201);
