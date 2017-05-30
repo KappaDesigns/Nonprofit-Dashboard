@@ -1,13 +1,5 @@
-let client = {};
+let client = require("redis").createClient("redis://redistogo:8b2186cfc25a6e2e59d0cf6af0daf7b9@greeneye.redistogo.com:10702/");
 const crypto = require('crypto');
-
-if (process.env.REDISTOGO_URL) {
-	var rtg = require("url").parse(process.env.REDISTOGO_URL);
-	client = require("redis").createClient(rtg.port, rtg.hostname);
-	client.auth(rtg.auth.split(":")[1]);
-} else {
-	client = require("redis").createClient();
-}
 
 module.exports.addUser = (body, next) => {
   client.incr('userID', (err, id) => {

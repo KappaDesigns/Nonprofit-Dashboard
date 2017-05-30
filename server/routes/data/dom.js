@@ -1,12 +1,4 @@
-let client = {};
-
-if (process.env.REDISTOGO_URL) {
-	var rtg = require("url").parse(process.env.REDISTOGO_URL);
-	client = require("redis").createClient(rtg.port, rtg.hostname);
-	client.auth(rtg.auth.split(":")[1]);
-} else {
-	client = require("redis").createClient();
-}
+let client = require("redis").createClient("redis://redistogo:8b2186cfc25a6e2e59d0cf6af0daf7b9@greeneye.redistogo.com:10702/");
 
 module.exports.getDomID = function (url, next) {
   client.hmget(`DomMap`, url, (err , data) => {
