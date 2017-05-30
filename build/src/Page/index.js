@@ -1,5 +1,4 @@
 import React from "react";
-import "es6-map/implement";
 import "whatwg-fetch";
 
 export default class Page extends React.Component {
@@ -44,7 +43,7 @@ export default class Page extends React.Component {
   }
 
   handleSockets() {
-    this.socket = io.connect('http://localhost:3000');
+    this.socket = io.connect('http://admin.kappadesigns.org');
 
     this.socket.emit('getID', {});
 
