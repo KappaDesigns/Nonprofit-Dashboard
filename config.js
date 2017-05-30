@@ -15,7 +15,8 @@ module.exports = {
 			if (err) {
 				throw err;
 			}
-			if (!key) {
+			if (key) {
+				console.log("initializing ["+index+"]....");
 				setInit();
 			}
 		})
@@ -33,5 +34,6 @@ function setInit() {
 }
 
 function setupSite() {
+	console.log("Crawling through ["+index+"]...");
 	crawler.crawl();
 }
