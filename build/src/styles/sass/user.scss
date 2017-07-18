@@ -1,0 +1,59 @@
+.user-edit-container {
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  background-image: url("https://c2.staticflickr.com/6/5561/14892464329_0342277ca1_k.jpg");
+  .edit-user {
+    background-color: white;
+    text-align: center;
+    padding: 0 0 25px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid black;
+  }
+  .user-edit {
+    background-color: white;
+    width: 400px;
+    margin: 100px auto;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.8);
+    .user-label, .password-label, .email-label {
+      text-align: left;
+      margin-top: 25px;
+      display: inline-block;
+      width: 100px;
+      font-size: 14px;
+    }
+    .username-field, .password-field, .email-field {
+      width: 200px;
+      padding: 3px 5px;
+      font-size: 14px;
+      border: none;
+      border-bottom: 1px solid black;
+      &:focus {
+        outline: none;
+      }
+    }
+    .submit-container {
+      margin: 0 auto;
+      text-align: center;
+      .submit {
+        font-size: 16px;
+        padding: 10px 15px;
+        margin: 45px auto;
+        display: block;
+        width: 125px;
+        border-radius: none;
+        border: none;
+        color:white;
+        background-color: rgb(48, 167, 65);
+        transition: all 0.2s ease-in-out;
+        border-bottom: 4px solid rgb(32, 116, 44);
+        &:hover {
+          background-color: rgb(31, 124, 44);
+          cursor: pointer;
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+.admin-panel-image-panel {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 300px !important;
+  height: 250px !important;
+  background-color: rgb(42, 38, 47) !important;
+  border-radius: 5px !important;
+  z-index: 5000 !important;
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75) !important;
+  -moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75) !important;
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75) !important;
+  .admin-panel-header {
+    color:white !important;
+    text-align: center !important;
+  }
+  .admin-panel-image-input {
+    color: white !important;
+    width: 95% !important;
+    margin: 5px auto !important;
+    display: block !important;
+    background-color: rgb(53, 48, 60) !important;
+    border: 1px solid black !important;
+    &:focus {
+      outline: none !important;
+    }
+  }
+  .admin-panel-image-preview {
+    margin: 0 auto !important;
+    width: 250px !important;
+    height: 125px !important;
+    display: block !important;
+  }
+  #admin-panel-ok-btn {
+    border-bottom-right-radius: 5px !important;
+  }
+  #admin-panel-cancel-btn {
+    border-bottom-left-radius: 5px !important;
+  }
+  .admin-panel-image-btn {
+    color: white !important;
+    background-color: rgb(53, 48, 60) !important;
+    width: 150px !important;
+    margin: 7px 0 !important;
+    border:none !important;
+    &:hover {
+      background-color: rgb(66, 60, 75) !important;
+    }
+    &:focus {
+      outline: none !important;
+    }
+  }
+}

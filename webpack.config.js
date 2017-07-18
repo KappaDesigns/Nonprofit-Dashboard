@@ -17,14 +17,6 @@ module.exports = {
           plugins: ['react-html-attrs','transform-class-properties','transform-decorators-legacy']
         }
       },
-      {
-        test: /\.css$/,
-        loader: "style-loader!css-loader",
-      },
-      {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
-        loader: 'url-loader?importLoaders=1&limit=100000'
-      }
     ]
   },
   output: {

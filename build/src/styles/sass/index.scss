@@ -1,9 +1,8 @@
-body, html {
-	margin: 0;
-	padding: 0;
-	font-family: 'PT Sans', sans-serif;
-}
-
-@import "tools/index";
-@import "pages/index";
-@import "modules/index";
+@import "input-normalize";
+@import "image-modal";
+@import "login";
+@import "spinner";
+@import "actionbutton";
+@import "pages";
+@import "user";
+@import "register"

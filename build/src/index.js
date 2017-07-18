@@ -1,25 +1,30 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDom from "react-dom";
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
-import "./styles/css/main.css";
-
-import Home from "./scenes/Home";
-import NotFound from "./scenes/NotFound";
-import Layout from "./scenes/Layout";
-import Carousel from "./scenes/Carousel";
+import Page from "./Page";
+import Login from "./Login";
+import Logout from "./Logout/";
+import Pages from "./Pages";
+import Layout from "./Layout";
+import User from "./User";
+import Register from "./Register";
 
 class App extends React.Component {
-	render() {
-		return (
-			<Router history={browserHistory}>
-				<Route component={Layout}>
-					<Route path="/" component={Home}></Route>
-					<Route path="/carousel" component={Carousel}></Route>
-				</Route>
-				<Route path="*" component={NotFound}></Route>
-			</Router>
-		)
-	}
+  render() {
+    return (
+      <Router history={browserHistory}>
+        <Route component={Layout}>
+          <Route path="/" component={Page}></Route>
+          <Route path="/page/:id" component={Page}></Route>
+          <Route path="/user" component={User}></Route>
+          <Route path="/pages" component={Pages}></Route>
+          <Route path="/register" component={Register}></Route>
+        </Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/logout" component={Logout}></Route>
+      </Router>
+    )
+  }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+ReactDom.render(<App></App>, document.getElementById('app'));
