@@ -2,6 +2,7 @@ import React from "react";
 import "whatwg-fetch";
 import crypto from "crypto";
 import { secret, subreddits } from "../../../fConfig";
+import jq from "jquery";
 
 export default class Login extends React.Component {
   constructor() {
@@ -17,7 +18,7 @@ export default class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     let self = this;
     let subrdt = this.state.subredditOptions[Math.floor(Math.random() * this.state.subredditOptions.length)];
-    $.getJSON("http://www.reddit.com/r/"+subrdt+"Porn/hot/.json?jsonp=?", function(data) {
+    jq.getJSON("http://www.reddit.com/r/"+subrdt+"Porn/hot/.json?jsonp=?", function(data) {
       let total = data.data.children.length;
       for (let i = 0; i < total; i++) {
         let url = data.data.children[i].data.url;
@@ -40,7 +41,7 @@ export default class Login extends React.Component {
     })
     .then((json) => {
       if (json.isAuthenticated) {
-        window.location.href = "/";
+        window.location.href = "/pages/";
       }
     })
   }
@@ -109,7 +110,7 @@ export default class Login extends React.Component {
         return res.json();
       }).then((json) => {
         if (json.hasOwnProperty("login")) {
-          window.location.href="/"
+          window.location.href="/pages/"
         }
       })
     })

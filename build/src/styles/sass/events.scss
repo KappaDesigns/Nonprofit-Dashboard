@@ -1,0 +1,232 @@
+.event-background {
+    background-image: url('https://s-media-cache-ak0.pinimg.com/736x/c6/97/c3/c697c3d280695ff0e9365e5136360586--geometric-art-geometric-patterns.jpg');
+    padding-bottom: 0;
+    margin-top: -25px;
+    min-height: 100vh;
+    .event-container {
+        margin: 0 auto;
+        max-width: 1220px;
+        width: 100%;
+        margin-bottom: 0;
+        .header {
+            text-align: center;
+            padding: 15px 10px;
+            background-color: white;
+            -webkit-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            margin: 25px auto;
+        }
+        .head {
+            text-align: center;
+            padding: 15px 10px;
+            margin: 25px auto;
+        }
+        .circle {
+            margin: 25px auto;
+            background-color: white;
+            width: 150px;
+            height: 150px;
+            -webkit-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            border-radius: 50%;
+            &:hover {
+                cursor: pointer;
+            }
+            span {
+                display: block;
+                width: 100%;
+                height: 100%;
+                font-size: 150px;
+                color: rgb(215, 59, 0);
+                line-height: 100%;
+                text-align: center;
+                transition: all 0.5s ease;
+                text-shadow: 1px 1px rgb(150, 150, 150), 2px 2px rgb(150, 150, 150) , 3px 3px rgb(150, 150, 150), 4px 4px rgb(150, 150, 150), 5px 5px rgb(150, 150, 150),
+                 6px 6px rgb(150, 150, 150), 7px 7px rgb(150, 150, 150), 8px 8px rgb(150, 150, 150), 9px 9px rgb(150, 150, 150), 10px 10px rgb(150, 150, 150),
+                 11px 11px rgb(150, 150, 150), 12px 12px rgb(150, 150, 150), 13px 13px rgb(150, 150, 150), 14px 14px rgb(150, 150, 150), 15px 15px rgb(150, 150, 150),
+                 16px 16px rgb(150, 150, 150), 17px 17px rgb(150, 150, 150), 18px 18px rgb(150, 150, 150), 19px 19px rgb(150, 150, 150), 20px 20px rgb(150, 150, 150), 21px 21px rgb(150, 150, 150),
+                 22px 22px rgb(150, 150, 150), 23px 23px rgb(150, 150, 150), 24px 24px rgb(150, 150, 150), 25px 25px rgb(150, 150, 150);
+                 &:hover {
+                     text-shadow: none;
+                 }
+            }
+        }
+        .flex {
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+            margin: 15px auto;
+        }
+        .edit-input {
+            margin: 10px 10px;
+            background-color: transparent;
+            max-width: 250px;
+            min-width: 100px;
+            width: 100%;
+            padding: 3px 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 0;
+            border-bottom: 2px solid black;
+            &:focus {
+                outline: none;
+            }
+        }
+        .preview {
+            display: block;
+            background-repeat: none;
+            background-position: center;
+            margin: 0 auto;
+            max-width: 250px;
+            max-height: 250px;
+        }
+        .add-container {
+            display: none;
+            -webkit-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            max-width: 900px;
+            width: 100%;
+            margin: 25px auto;
+            background-color: white;
+            text-align: center;
+            padding: 25px;
+        }
+        .submit {
+            transition: all 0.5s ease;
+            display: block;
+            margin: 15px auto;
+            border-bottom: 5px solid rgb(15, 75, 25);
+            width: 100%;
+            max-width: 300px;
+            min-width: 100px;
+            background-color: green;
+            padding: 20px 0;
+            color: white;
+            font-weight: bold;
+            &:hover {
+                border-bottom: 0px;
+            }
+        }
+        .red {
+            background-color:red;
+            border-bottom: 5px solid rgb(75, 25, 15);
+        }
+        .white {
+            color: black;
+            background-color:white;
+            border-bottom: 5px solid black;
+        }
+        .modal {
+            opacity: 0;
+            top: 0;
+            left: 0;
+            position: fixed;
+        }
+        .events-contain {
+            -webkit-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+            background-color: white;
+            padding: 25px;
+        }
+        .events {
+            display: flex;
+            
+            .event {
+                margin: 25px 25px;
+                width: 250px;
+                height: 250px;
+                background-size: cover;
+                background-position: center;
+                .data {
+                    color: black;
+                    .date {
+                        display: block;
+                        padding: 10px 20px;
+                        text-align: left;
+                    }
+                    .title {
+                        text-align: center;
+                        margin-top: 50px;
+                        text-transform: capitalize;
+                    }
+                }
+                [class*="-0"] {
+                    background-color: rgba(0,0,0,0.75);
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    color:white;
+                }
+                [class*="-1"] {
+                    color: black;
+                    z-index: 1000000000000000000;
+                    top: 25px;
+                    left: 25px;
+                     -webkit-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+                    -moz-box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+                    box-shadow: 0px 0px 15px 6px rgba(0,0,0,0.75);
+                    background-color: white;
+                    color:black;
+                    width: calc(100% - 50px);
+                    height: calc(100% - 50px);
+                    font-size: 18px;
+                }
+                .overlay {
+                    transition: all 1s ease;
+                    opacity: 0;
+                    position: absolute;
+                    .desc {
+                        padding: 25px;
+                    }
+                    .editor {
+                        position: relative;
+                        .close {
+                            transition: all 0.5s ease;
+                            position: fixed;
+                            top: 50px;
+                            right: 75px;
+                            font-size: 50px;
+                            font-weight: bold;
+                            &:hover {
+                                font-weight: bolder;
+                                transform: scale(1.25);
+                            }
+                        }
+                        .update {
+                            max-width: 900px;
+                            margin: 0 auto;
+                            text-align: center;
+                            .title {
+                                padding: 20px;
+                                padding-bottom: 10px;
+                                text-decoration: underline;
+                                text-align: center;
+                            }
+                            .modal {
+                                h1 {
+                                    color: white;
+                                }
+                                background-color: rgba(0,0,0,0.95);
+                                width:100%;
+                                height: 100%;
+                                position: fixed;
+                            }
+                        }
+                    }
+                }
+                &:hover {
+                    cursor: pointer;
+                    .data {
+                        -webkit-filter: blur(100%); /* Safari 6.0 - 9.0 */
+                        filter: blur(5px);
+                    }
+                }
+            }
+        }
+    }
+}

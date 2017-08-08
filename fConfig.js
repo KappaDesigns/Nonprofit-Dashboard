@@ -19,10 +19,16 @@ export const actions = [
     icon: "fa fa-user fa-2x"
   },
   {
+    tooltip: "Events",
+    path: "/events",
+    color: "rgb(238, 244, 66)",
+    icon: "fa fa-calendar fa-2x"
+  },
+  {
     tooltip: "Logout",
     path: "/logout",
     color: "rgb(37, 182, 201)",
     icon: "fa fa-sign-out fa-2x"
-  }
+  },
 ];
 export const subreddits = ["Earth"];

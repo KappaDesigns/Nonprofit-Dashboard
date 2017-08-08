@@ -22,18 +22,18 @@ export default class Register extends React.Component {
 
 	isAuth() {
 		fetch(`/api/authenticated`, {
-      method: "post",
-      credentials: "same-origin"
-    })
-    .then((res) => {
-      return res.json();
-    })
-    .then((json) => {
-      if (!json.isAuthenticated) {
+			method: "post",
+			credentials: "same-origin"
+		})
+		.then((res) => {
+			return res.json();
+		})
+		.then((json) => {
+			if (!json.isAuthenticated) {
 				window.location.href = "/login";
-        return;
-      }
-    })
+				return;
+			}
+		});
 	}
 
 	render() {
@@ -102,7 +102,7 @@ export default class Register extends React.Component {
 							method: "post",
 							headers: {
 								'Accept': 'application/json',
-			          'Content-Type': 'application/json'
+			          			'Content-Type': 'application/json'
 							},
 							body: JSON.stringify(form)
 						})

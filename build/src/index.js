@@ -7,6 +7,7 @@ import Logout from "./Logout/";
 import Pages from "./Pages";
 import Layout from "./Layout";
 import User from "./User";
+import Events from "./Events";
 import Register from "./Register";
 
 class App extends React.Component {
@@ -14,11 +15,12 @@ class App extends React.Component {
     return (
       <Router history={browserHistory}>
         <Route component={Layout}>
-          <Route path="/" component={Page}></Route>
+          <Route path="/" component={Pages}></Route>
           <Route path="/page/:id" component={Page}></Route>
           <Route path="/user" component={User}></Route>
           <Route path="/pages" component={Pages}></Route>
           <Route path="/register" component={Register}></Route>
+          <Route path="/events" component={Events}></Route>
         </Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/logout" component={Logout}></Route>

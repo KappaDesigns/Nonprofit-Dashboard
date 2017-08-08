@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "input-normalize";
 @import "image-modal";
 @import "login";
@@ -5,4 +6,9 @@
 @import "actionbutton";
 @import "pages";
 @import "user";
-@import "register"
+@import "register";
+@import "events";
+
+body {
+    font-family: 'Roboto', sans-serif;
+}

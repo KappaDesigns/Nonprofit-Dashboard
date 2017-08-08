@@ -15,9 +15,15 @@ class LinkCrawler {
 	}
 
 	downloadSite(page) {
-		console.log("on page: "+ page + "...");
-		this.recursed.add(page);
 		let url = `http://${page}`;
+		let parts = url.split("//");
+		if (parts.length > 2) {
+			url = parts[0] + "//" + parts[1] + "/" + parts[2];
+		}
+		if (url.substring(url.length - 1, url.length) == "/") {
+			url = url.substring(0, url.length - 1);
+		}
+		this.recursed.add(page);
 		while(page.includes("/")) {
 			page = page.replace("/", "_");
 		}
@@ -28,6 +34,10 @@ class LinkCrawler {
 				throw err;
 			}
 			let file = fs.createWriteStream(path);
+			if (!url.includes('index.html')) {
+				url += "/index.html";
+			}
+			console.log(`url: ${url}...`);
 			let req = http.get(url, res => {
 				res.pipe(file).on('finish', () => {
 					this.readFile(path);

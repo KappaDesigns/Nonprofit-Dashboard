@@ -1,7 +1,7 @@
 const MockDOM = require('./MockDOM');
 const Crawler = require('./LinkCrawler');
 
-const index = "kappadesigns.org";
+const index = "motley.kappadesigns.org";
 
 const redis = require("./redis");
 const client = redis.client;

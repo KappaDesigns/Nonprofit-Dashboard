@@ -1,6 +1,7 @@
 import React from "react";
 import crypto from "crypto";
 import { secret } from "../../../fConfig";
+import jq from "jquery";
 
 export default class User extends React.Component {
   constructor() {
@@ -112,7 +113,7 @@ export default class User extends React.Component {
   }
 
   handleInputClick(e) {
-    $('.field').css({
+    jq('.field').css({
       "border-bottom": "1px solid black"
     })
     let color = '#' + ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6);

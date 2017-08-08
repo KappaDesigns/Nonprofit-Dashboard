@@ -16,7 +16,8 @@ module.exports.addUser = (body, next) => {
       if (err) {
         return next(err);
       }
-    })
+      return next('done');
+    });
   })
 }
 

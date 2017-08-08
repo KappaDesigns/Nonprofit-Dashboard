@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { actions } from "../../../../fConfig";
+import jq from "jquery";
 
 export default class ActionButton extends React.Component {
   constructor() {
@@ -12,8 +13,8 @@ export default class ActionButton extends React.Component {
   }
 
   componentDidMount() {
-    $('.action-button').click(() => {
-      $('#action-list').slideToggle();
+    jq('.action-button').click(() => {
+      jq('#action-list').slideToggle();
     })
   }
 

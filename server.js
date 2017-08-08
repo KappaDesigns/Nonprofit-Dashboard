@@ -23,6 +23,7 @@ initializeDomMap();
 //routes
 const page = require('./server/routes/page');
 const login = require('./server/routes/login');
+const events = require('./server/routes/event');
 
 const User = require('./server/routes/data/User');
 
@@ -50,7 +51,8 @@ passport.deserializeUser((id, next) => {
 })
 
 app.use('/api', page);
-app.use('/api', login)
+app.use('/api', login);
+app.use('/api', events);
 
 app.use('/', (req, res, next) => {
 	res.sendFile(path.resolve(__dirname, 'build', 'index.html'));

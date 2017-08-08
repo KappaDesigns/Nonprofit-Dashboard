@@ -1,5 +1,6 @@
 import React from "react";
 import "whatwg-fetch";
+import jq from "jquery";
 
 export default class Page extends React.Component {
 
@@ -7,6 +8,7 @@ export default class Page extends React.Component {
     super();
     this.indexMap = {};
     this.index = 0;
+    this.scriptQueue = [];
     this.state = {
 
     }
@@ -17,7 +19,7 @@ export default class Page extends React.Component {
   }
 
   componentWillMount() {
-    let id = this.props.params.id !== undefined ? this.props.params.id : "";
+    let id = this.props.params.id !== undefined ? this.props.params.id : 1;
     this.setState({
       page: id
     })
@@ -43,7 +45,7 @@ export default class Page extends React.Component {
   }
 
   handleSockets() {
-    this.socket = io.connect('http://admin.kappadesigns.org');
+    this.socket = io.connect('http://localhost:3000');
 
     this.socket.emit('getID', {});
 
@@ -92,10 +94,28 @@ export default class Page extends React.Component {
       })
       this.getCSS(head);
       this.getScripts(json.DOM);
+      this.loadScripts();
       this.setState({
         fetched: true
       })
     })
+  }
+
+  loadScripts() {
+    function loadSequential() {
+      if (this.scriptQueue.length != 0 ) {
+        let src = this.scriptQueue.shift();
+        console.log(src);
+        jq.getScript(src, (data, status, xhr) => {
+          iterate();
+        });
+      }
+      function iterate() {
+        loadSequential();
+      }
+    }
+    loadSequential = loadSequential.bind(this);
+    loadSequential();
   }
 
   findBody(nodes, a) {
@@ -118,8 +138,7 @@ export default class Page extends React.Component {
             src = src.replace(this.state.dom.path);
             src = "http://" + this.indexPath + "/" + src;
           }
-          let htmlString = `<script src=${src}></script>`;
-          $('body').append(htmlString)
+          this.scriptQueue.push(src);
         }
       }
       if (DOM[i].hasOwnProperty("children")) {
@@ -139,20 +158,21 @@ export default class Page extends React.Component {
           href = "http://" + this.indexPath + "/" + href;
         }
         let htmlString = `<${link.name} href=${href} rel=${rel}></${link.name}>`;
-        $('head').append(htmlString);
+        jq('head').append(htmlString);
       }
     }
   }
 
   render() {
     this.index = 0;
-    console.log(this.state);
     if (this.state.fetched) {
       return (
         <div>
-          {this.state.body.children.map(this.renderDOM)}
+          {
+            this.state.body.children.map(this.renderDOM)
+          }
         </div>
-      )
+      );
     }
     return (
       <div className="admin-panel-loading">
@@ -164,7 +184,7 @@ export default class Page extends React.Component {
             <div class="sk-cube3 sk-cube"></div>
           </div>
       </div>
-    )
+    );
   }
 
   renderDOM(item) {
@@ -175,13 +195,12 @@ export default class Page extends React.Component {
       backgroundImage: opts.backgroundImage
     }
     this.indexMap[index] = item
+    let Tag = "" + item.name;
     if (!item.hasOwnProperty("children") && item.type == "tag") {
-      let Tag = "" + item.name;
       return (
         <Tag key={index} style={backgroundImage} src={opts.src} data-index={index} id={opts.id} href={opts.href} class={opts.class}></Tag>
       )
     } else if (item.hasOwnProperty("children")) {
-      let Tag = "" + item.name;
       return (
         <Tag style={backgroundImage} onClick={this.handleClick} data-index={index} key={index} id={opts.id} href={opts.href} src={opts.src} class={opts.class}>
           {
@@ -213,7 +232,7 @@ export default class Page extends React.Component {
 
   handleImageClick(e) {
     let tag = e.target.tagName;
-    let $target = $(e.target);
+    let $target = jq(e.target);
     let bgUrl = $target.css("background-image");
     let url = tag == "IMG" ? e.target.src : bgUrl;
     if (url !== "none") {
@@ -256,7 +275,7 @@ export default class Page extends React.Component {
 
 // TODO: Break down into smaller functions
   renderImageEdit(e, ele, url) {
-    $('.admin-panel-image-panel').remove();
+    jq('.admin-panel-image-panel').remove();
     let template = '<div class="admin-panel-image-panel"><h3 class="admin-panel-header">Change Url</h3><input value='+url+' type="text" placeholder="Input Url Here..." class="admin-panel-image-input">' +
     '<img src="' + url + '" alt="" class="admin-panel-image-preview"><button id="admin-panel-cancel-btn" class="admin-panel-image-btn">Cancel</button>' +
     '<button id="admin-panel-ok-btn" class="admin-panel-image-btn">Ok</button></div>';
@@ -269,7 +288,7 @@ export default class Page extends React.Component {
 
     let index = parseInt(ele.data("index"));
 
-    let $child = $(ele).parent().find(".admin-panel-image-panel");
+    let $child = jq(ele).parent().find(".admin-panel-image-panel");
     let width = $child.width();
     let height = $child.height();
     let top = e.pageY - height > 0 ? e.pageY - height : 0;
@@ -286,8 +305,8 @@ export default class Page extends React.Component {
       })
     })
 
-    let okButton = $('#admin-panel-ok-btn');
-    let cancelButton = $('#admin-panel-cancel-btn');
+    let okButton = jq('#admin-panel-ok-btn');
+    let cancelButton = jq('#admin-panel-cancel-btn');
 
     okButton.click(() => {
       let node = this.indexMap[index];
