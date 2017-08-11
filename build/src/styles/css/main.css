@@ -421,6 +421,15 @@ body, html {
     max-width: 1220px;
     width: 100%;
     margin-bottom: 0; }
+    .event-background .event-container .featured {
+      transition: 0.5s all ease;
+      display: block;
+      text-align: center; }
+      .event-background .event-container .featured:hover {
+        text-decoration: underline;
+        cursor: pointer;
+        color: #6E6E6E;
+        transform: scale(1.1); }
     .event-background .event-container .header {
       text-align: center;
       padding: 15px 10px;
@@ -461,6 +470,9 @@ body, html {
       width: 100%;
       max-width: 1000px;
       margin: 15px auto; }
+    .event-background .event-container #input-3 {
+      text-decoration: underline;
+      color: #0f78ff; }
     .event-background .event-container .edit-input {
       margin: 10px 10px;
       background-color: transparent;
@@ -525,11 +537,12 @@ body, html {
       background-color: white;
       padding: 25px; }
     .event-background .event-container .events {
-      display: flex; }
+      display: flex;
+      flex-wrap: wrap; }
       .event-background .event-container .events .event {
         margin: 25px 25px;
-        width: 250px;
-        height: 250px;
+        width: 240px;
+        height: 240px;
         background-size: cover;
         background-position: center; }
         .event-background .event-container .events .event .data {
@@ -602,6 +615,51 @@ body, html {
             -webkit-filter: blur(100%);
             /* Safari 6.0 - 9.0 */
             filter: blur(5px); }
+
+.featured-modal {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  width: 100%;
+  height: 100%; }
+  .featured-modal h1 {
+    padding: 15px;
+    text-align: center; }
+  .featured-modal h4 {
+    padding: 10px;
+    text-align: center; }
+  .featured-modal .featured-container {
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.75);
+    max-width: 900px;
+    background-color: white;
+    position: relative; }
+    .featured-modal .featured-container .close {
+      position: absolute;
+      top: 25px;
+      right: 50px;
+      font-size: 30px;
+      font-weight: bold;
+      transition: all 0.5s ease; }
+      .featured-modal .featured-container .close:hover {
+        cursor: pointer;
+        transform: scale(1.1); }
+    .featured-modal .featured-container .event {
+      padding: 10px;
+      display: flex; }
+      .featured-modal .featured-container .event input {
+        padding: 0;
+        margin-right: 15px;
+        margin-top: 5px; }
+      .featured-modal .featured-container .event h3 {
+        font-size: 18px;
+        text-transform: capitalize;
+        padding: 0;
+        margin: 0; }
 
 body {
   font-family: 'Roboto', sans-serif; }

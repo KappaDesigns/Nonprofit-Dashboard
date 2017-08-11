@@ -1,6 +1,7 @@
 import React from "react";
 import "whatwg-fetch";
 import Event from "./Event";
+import Featured from "./Featured";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import jQuery from "jquery";
@@ -8,19 +9,23 @@ import jQuery from "jquery";
 export default class EventEditor extends React.Component {
 
     constructor() {
-        super();
+		super();
+		let date = moment(new Date());
         this.state = {
 			fetched: false,
+			displayModal: false,
 			style: {
 				display: 'none',
 			},
 			form: {
 				title: '',
 				desc: '',
-				date: moment(new Date()),
+				date: date,
+				selectedDate: date.format("MM-DD-YYYY"),
 				link: '',
 				src: '',
-			}
+			},
+			events: [],
         }
 		this.isAuth();
 		this.displayContainer = this.displayContainer.bind(this);
@@ -30,6 +35,8 @@ export default class EventEditor extends React.Component {
 		this.handleSrc = this.handleSrc.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleTitle = this.handleTitle.bind(this);
+		this.showFeaturedModal = this.showFeaturedModal.bind(this);
+		this.closeFeaturedModal = this.closeFeaturedModal.bind(this);
     }
 
     isAuth() {
@@ -55,7 +62,6 @@ export default class EventEditor extends React.Component {
 		}).then((data) => {
 			return data.json();
 		}).then((json) => {
-			console.log(json);
 			this.setState({
 				fetched: true,
 				events: json,
@@ -66,6 +72,11 @@ export default class EventEditor extends React.Component {
 	}
 
     render() {
+		let modal = null;
+		if (this.state.displayModal) {
+			modal = <Featured closeModal={this.closeFeaturedModal} events={this.state.events}/>
+		}
+
 		if (!this.state.fetched) {
 			return (
 				<div className="admin-panel-loading">
@@ -95,7 +106,9 @@ export default class EventEditor extends React.Component {
 								<label className="label" htmlFor="input-2">Desc</label>
 								<input onChange={this.handleDesc} value={this.state.form.desc} type="text" className="edit-input" id="input-2"/>
 								<br/>
-								<label className="label" htmlFor="input-3">Link</label>
+								<br/>
+								<label className="label" htmlFor="input-3">Link To Information (Blog Post, Paperless Post, etc...)</label>
+								<br/>
 								<input onChange={this.handleLink} value={this.state.form.link} type="text" className="edit-input" id="input-3"/>
 								<br/>
 								<label className="label" htmlFor="input-4">Image</label>
@@ -110,6 +123,8 @@ export default class EventEditor extends React.Component {
 							</div>
 						</div>
 						<div className="events-contain">
+							<span className="featured" onClick={this.showFeaturedModal}>Featured</span>
+							{modal}
 							<h1 className="head">Edit Events</h1>
 							<div className="events">
 								{
@@ -123,6 +138,18 @@ export default class EventEditor extends React.Component {
 				</div>
         	);
 		}
+	}
+
+	showFeaturedModal() {
+		this.setState({
+			displayModal: true,
+		});
+	}
+
+	closeFeaturedModal() {
+		this.setState({
+			displayModal: false,
+		})
 	}
 
 	handleTitle(e) {
@@ -160,6 +187,7 @@ export default class EventEditor extends React.Component {
 	handleDate(date) {
 		let form = this.state.form;
 		form.date = date;
+		form.selectedDate = date.format("MM-DD-YYYY");
 		this.setState({
 			form: form,
 		});
@@ -171,7 +199,8 @@ export default class EventEditor extends React.Component {
             desc: this.state.form.desc,
             link: this.state.form.link,
             src: this.state.form.src,
-            date: this.state.form.date,
+			date: this.state.form.selectedDate,
+			featured: false,
         });
 		fetch(`/api/event/`, {
             credentials: 'same-origin',

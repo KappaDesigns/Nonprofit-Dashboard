@@ -3,18 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/event', (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        res.send({
-            success: false,
-        })
-    } else {
-        Events.getAll((err, events) => {
-            if (err) {
-                return next(err);
-            }
-            return res.json(events);
-        })
-    }
+    Events.getAll((err, events) => {
+        if (err) {
+            return next(err);
+        }
+        return res.json(events);
+    })
 });
 
 router.post('/event', (req, res, next) => {
@@ -68,12 +62,36 @@ router.delete('/event/:id', (req, res, next) => {
     }
 });
 
-router.put('/event/featured', (req, res, next) => {
-
+router.post('/event/featured', (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        res.send({
+            success: false,
+        })
+    } else {
+        let ids = req.body;
+        Events.getAll((err, events) => {
+            if (err) {
+                return next(err);
+            }
+            events.forEach((event) => {
+                if (ids.indexOf(event._id) != - 1) {
+                    Events.update(event._id, { featured: true }, (err) => {
+                        if (err) {
+                            return next(err);
+                        }
+                    });
+                } else {
+                    console.log(ids.indexOf(event._id), event, ids);
+                    Events.update(event._id, { featured: false }, (err) => {
+                        if (err) {
+                            return next(err);
+                        }
+                    });
+                }
+            });
+            res.json({ success: true });
+        })
+    }
 });
-
-router.get('/event/featured', (req, res, next) => {
-    
-})
 
 module.exports = router;

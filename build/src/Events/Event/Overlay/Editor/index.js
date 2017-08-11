@@ -7,7 +7,8 @@ export default class Editor extends React.Component {
     constructor(props) {
         super();
         this.state = {
-            startDate: moment(props.event.date),
+            date: moment(props.event.date),
+            startDate: moment(props.event.date).format("MM-DD-YYYY"),
             title: props.event.title,
             src: props.event.backgroundImage,
             desc: props.event.desc,
@@ -41,7 +42,9 @@ export default class Editor extends React.Component {
                     <label className="label" htmlFor="input-2">Desc</label>
                     <input onChange={this.handleDesc} value={this.state.desc} type="text" className="edit-input" id="input-2"/>
                     <br/>
-                    <label className="label" htmlFor="input-3">Link</label>
+                    <br/>
+                    <label className="label" htmlFor="input-3">Link To Information (Blog Post, Paperless Post, etc...)</label>
+                    <br/>
                     <input onChange={this.handleLink} value={this.state.link} type="text" className="edit-input" id="input-3"/>
                     <br/>
                     <label className="label" htmlFor="input-4">Image</label>
@@ -50,7 +53,7 @@ export default class Editor extends React.Component {
                     <br/>
                     <span className="label">Date</span>
                     <br/>
-                    <DatePicker selected={this.state.startDate} className="edit-input" onChange={this.handleDateChange}/>
+                    <DatePicker selected={this.state.date} className="edit-input" onChange={this.handleDateChange}/>
                     <br/>
                     <div className="flex">
                         <a onClick={this.handleSubmit} className="submit">Submit</a>
@@ -150,7 +153,8 @@ export default class Editor extends React.Component {
 
     handleDateChange(date) {
         this.setState({
-            startDate:date,
+            startDate: date.format("MM-DD-YYYY"),
+            date: date,
         });
     }
 }

@@ -2,6 +2,7 @@ const redis = require("../../../redis");
 const client = redis.client;
 const ListKey = 'EventIds';
 const IDKey = 'EventID';
+const moment = require('moment');
 
 module.exports.getAll = (next) => {
     getIds((err, ids) => {
@@ -16,11 +17,23 @@ module.exports.getAll = (next) => {
                 next(err);
             }
             events.sort(function(a,b) {
-                return a.date < b.date;
+                let dateA = a.date.split("-");
+                let dateB = b.date.split("-");
+                if (dateA[2] == dateB[2]) {
+                    if (dateA[0] == dateB[0]) {
+                        console.log(dateA[2], dateB[2]);
+                        if (dateA[1] == dateB[1]) {
+                            return a.title > b.title;
+                        } else {
+                            return dateA[1] > dateB[1];
+                        }
+                    } else {
+                        return dateA[0] > dateB[0];
+                    }
+                } else {
+                    return dateA[2] > dateB[2];
+                }
             });
-            events.forEach((event) => {
-                event.date = new Date(parseInt(event.date));
-            })
             return next(null, events);
         });
     });
@@ -32,9 +45,6 @@ module.exports.create = (data, next) => {
             return next(err);
         }
         data._id = id;
-        if (!data.date) {
-            data.date = new Date();
-        }
         client.hmset(`event:${id}`, data, (err) => {
             if (err) {
                 return next(err);
