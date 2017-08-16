@@ -95,7 +95,11 @@ class LinkCrawler {
 				let path = current.children[i].attribs.href;
 				if (!path.includes("http") && !path.startsWith("#")) {
 					if (!path.includes(this.url)) {
-						url = this.url + "/" + path;
+						if (path[0] != '/') {
+							url = this.url + "/" + path;
+						} else {
+							url = this.url + path;
+						}
 					}
 					url = url.toLowerCase();
 					if (!this.recursed.has(url)) {
