@@ -12,6 +12,19 @@ export default class Event extends React.Component {
             }
         }
         this.changePosition = this.changePosition.bind(this);
+        fetch(`/api/authenticated`, {
+			method: "post",
+			credentials: "same-origin"
+		})
+		.then((res) => {
+			return res.json();
+		})
+		.then((json) => {
+			if (!json.isAuthenticated) {
+				window.location.href = "/login";
+				return;
+			}
+		});
     }
 
     render() {

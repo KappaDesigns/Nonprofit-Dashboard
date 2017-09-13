@@ -9,6 +9,7 @@ import Layout from "./Layout";
 import User from "./User";
 import Events from "./Events";
 import Register from "./Register";
+import Pets from "./Pets";
 
 class App extends React.Component {
   render() {
@@ -21,6 +22,7 @@ class App extends React.Component {
           <Route path="/pages" component={Pages}></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/events" component={Events}></Route>
+          <Route path="/pets" component={Pets}></Route>
         </Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/logout" component={Logout}></Route>

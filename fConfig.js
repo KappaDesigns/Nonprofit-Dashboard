@@ -25,6 +25,12 @@ export const actions = [
     icon: "fa fa-calendar fa-2x"
   },
   {
+    tooltip: "Pets",
+    path: "/pets",
+    color: "rgb(37, 20, 188)",
+    icon: "fa fa-paw fa-2x"
+  },
+  {
     tooltip: "Logout",
     path: "/logout",
     color: "rgb(37, 182, 201)",
